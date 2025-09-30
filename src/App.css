@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+/* NAVBAR */
+
 #weatherAppIconNavbar {
   width: 2.2em;
+}
+
+.navbar-toggler {
+  border: none;
 }
