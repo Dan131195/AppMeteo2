@@ -27,17 +27,17 @@ function NavBar() {
             </span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <form className="d-flex py-2 ms-sm-3" role="search">
+            <form
+              className="d-flex justify-content-end w-100 py-2 ms-sm-3"
+              role="search"
+            >
               <input
-                className="form-control me-2 d-inline"
+                className="form-control me-2"
                 type="search"
                 placeholder="Cerca.."
                 aria-label="Search"
               />
-              <button
-                className="btn btn-outline-success d-inline"
-                type="submit"
-              >
+              <button className="btn btn-outline-success" type="submit">
                 Cerca
               </button>
             </form>
