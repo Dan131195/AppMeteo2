@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+#weatherApp {
+  background-image: url();
+}
+
 /* NAVBAR */
 
 #weatherAppIconNavbar {
