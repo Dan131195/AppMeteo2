@@ -2,10 +2,23 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: #fff;
+  font-family: "Segoe UI", "Roboto" sans-serif;
 }
 
 #weatherApp {
-  background-image: url();
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(46, 111, 233);
+}
+
+#weatherApp > div:first-of-type {
+  flex: 1;
+}
+
+#main-content {
+  flex: 1;
 }
 
 /* NAVBAR */
@@ -17,3 +30,21 @@
 .navbar-toggler {
   border: none;
 }
+
+.form-control {
+  max-width: 180px;
+  max-height: 30px;
+}
+
+.form-control::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+/* HOMPAGE */
+
+.currentWeatherContainer {
+  background-color: #ffffff65;
+}
+
+/* FOOOTER */
