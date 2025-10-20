@@ -17,6 +17,11 @@ import rain2 from "../assets/svg/rain2.svg";
 import snow from "../assets/svg/snow.svg";
 import thunderstorm from "../assets/svg/thunderstorm.svg";
 
+import humidityIcon from "../assets/icons/humidity.svg";
+import thermometerIcon from "../assets/icons/thermometer.svg";
+import visibilityIcon from "../assets/icons/visibility.png";
+import windIcon from "../assets/icons/wind.svg";
+
 function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
 
@@ -38,11 +43,11 @@ function Homepage({ city }) {
     "10d": rain2,
     "010n": rain2Night,
     "11d": thunderstorm,
-    "11n": cloudy,
-    "13d": cloudy,
-    "13n": cloudy,
-    "50d": cloudy,
-    "50n": cloudy,
+    "11n": thunderstorm,
+    "13d": snow,
+    "13n": snow,
+    "50d": mist,
+    "50n": mist,
   };
 
   const getCustomIcon = (code) => {
