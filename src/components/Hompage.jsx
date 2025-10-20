@@ -4,21 +4,24 @@ import { useEffect, useState } from "react";
 import locationIcon from "../assets/location-icon.png";
 
 // WHEATHER ICON
-import clearDay from "../assets/Icons/clear-day.svg";
-import clearNight from "../assets/Icons/clear-night.svg";
-import cloudy from "../assets/Icons/cloudy.svg";
-import fewCloudNight from "../assets/Icons/few-cloud-night.svg";
-import fewCloud from "../assets/Icons/few-clouds.svg";
-import mist from "../assets/Icons/mist.svg";
-import overcast from "../assets/Icons/overcast.svg";
-import rain1 from "../assets/Icons/rain1.svg";
-import rain2Night from "../assets/Icons/rain2-night.svg";
-import rain2 from "../assets/Icons/rain2.svg";
-import snow from "../assets/Icons/snow.svg";
-import thunderstorm from "../assets/Icons/thunderstorm.svg";
+import clearDay from "../assets/svg/clear-day.svg";
+import clearNight from "../assets/svg/clear-night.svg";
+import cloudy from "../assets/svg/cloudy.svg";
+import fewCloudNight from "../assets/svg/few-cloud-night.svg";
+import fewCloud from "../assets/svg/few-clouds.svg";
+import mist from "../assets/svg/mist.svg";
+import overcast from "../assets/svg/overcast.svg";
+import rain1 from "../assets/svg/rain1.svg";
+import rain2Night from "../assets/svg/rain2-night.svg";
+import rain2 from "../assets/svg/rain2.svg";
+import snow from "../assets/svg/snow.svg";
+import thunderstorm from "../assets/svg/thunderstorm.svg";
 
 function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
+
+  //API KEY
+  const key = "1b1a7d140962ca9867deae37cfeb542e";
 
   // WHEATHER ICON
   const iconMap = {
@@ -42,8 +45,9 @@ function Homepage({ city }) {
     "50n": cloudy,
   };
 
-  //API KEY
-  const key = "1b1a7d140962ca9867deae37cfeb542e";
+  const getCustomIcon = (code) => {
+    return iconMap[code];
+  };
 
   useEffect(() => {
     if (city) {
@@ -89,19 +93,30 @@ function Homepage({ city }) {
                 </p>
               </div>
 
+              {/* Per selezionare le icone personalizzate con la funzione */}
               <img
-                src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-                alt="Weather Icon"
+                src={getCustomIcon(weatherData.weather[0].icon)}
+                alt={weatherData.weather[0].description}
+                id="weatherIcon"
               />
             </div>
+
             <p className="fs-5 ps-2">
               {/*  Per mettere la maiuscola della prima lettera ⬇️⬇️ */}
               {weatherData.weather[0].description.charAt(0).toUpperCase() +
-                weatherData.weather[0].description.slice(1)}
+                weatherData.weather[0].description.slice(1)}{" "}
+              <span className="ps-2">
+                {Math.floor(weatherData.main.temp_min)}° /{" "}
+                {Math.floor(weatherData.main.temp_max)}°
+              </span>
             </p>
 
             <div className="ps-2 row row-cols-2 row-cols-lg-3">
-              <div className="border border-1 border-light"></div>
+              <div className="border border-1 border-light">
+                <img src="" alt="" />
+                <p></p>
+                <p></p>
+              </div>
               <div></div>
               <div></div>
               <div></div>
