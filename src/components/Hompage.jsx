@@ -72,13 +72,6 @@ function Homepage({ city }) {
     }
   };
 
-  const getIcon = () => {
-    if (weatherData && weatherData.weather && weatherData.weather.length > 0) {
-      return `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
-    }
-    return null;
-  };
-
   return (
     <div className="container">
       {weatherData ? (
