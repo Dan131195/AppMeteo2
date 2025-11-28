@@ -127,7 +127,7 @@ function Homepage({ city }) {
             </p>
 
             <div className="container mb-4">
-              <div className="d-flex overflow-auto weatherFiveDays">
+              <div className="d-flex w-100 text-center overflow-auto weatherFiveDays">
                 {weatherFiveDays ? (
                   weatherFiveDays.map((a, i) => {
                     const [dateStr, timeStr] = a.dt_txt.split(" ");
