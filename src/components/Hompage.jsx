@@ -169,6 +169,10 @@ function Homepage({ city }) {
               </div>
             </div>
 
+            {/* DA AGGIUSTARE LA CARD PREVISIONE SETTIMANALE  */}
+
+            {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
+
             <div className="container mb-4">
               <div className="d-flex m-auto overflow-auto weatherWeekDays">
                 {weatherWeekDays ? (
@@ -193,6 +197,8 @@ function Homepage({ city }) {
                 )}
               </div>
             </div>
+
+            {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
 
             <div className="cardsContainer row row-cols-2 row-cols-lg-3">
               <div className=" ps-4 pe-2">
