@@ -24,6 +24,7 @@ import windIcon from "../assets/icons/wind.svg";
 
 function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
+  const [weatherFiveDays, setWeatherFiveDays] = useState(null);
   const arr = [];
 
   //API KEY
@@ -81,9 +82,10 @@ function Homepage({ city }) {
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`
       );
       const data = await response.json();
-      data.list.slice(0, 10).forEach((item) => {
+      data.list.slice(0, 15).forEach((item) => {
         arr.push(item);
       });
+      setWeatherFiveDays(arr);
       console.log(arr);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
@@ -116,7 +118,6 @@ function Homepage({ city }) {
                 id="weatherIcon"
               />
             </div>
-
             <p className="fs-5 ps-2 capitalize-first">
               {weatherData.weather[0].description}
               <span className="ps-2">
@@ -124,6 +125,32 @@ function Homepage({ city }) {
                 {Math.floor(weatherData.main.temp_max)}°
               </span>
             </p>
+
+            <div className="container mb-4">
+              <div className="d-flex overflow-auto">
+                {weatherFiveDays ? (
+                  weatherFiveDays.map((a, i) => {
+                    const [dateStr, timeStr] = a.dt_txt.split(" ");
+                    // eslint-disable-next-line no-unused-vars
+                    const [year, month, day] = dateStr.split("-");
+                    const time = timeStr.slice(0, 5);
+
+                    return (
+                      <div key={i} className="me-3 text-center">
+                        <p className="m-0">{`${day}/${month}`}</p>
+                        <p className="m-0 mb-2">{time}</p>
+                        <p>
+                          {" "}
+                          <img src={getCustomIcon(a.weather[0].icon)} id="" />
+                        </p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p>Caricamento..</p>
+                )}
+              </div>
+            </div>
 
             <div className=" row row-cols-2 row-cols-lg-3">
               <div className=" ps-4 pe-2">
