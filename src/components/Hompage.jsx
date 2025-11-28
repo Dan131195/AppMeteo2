@@ -25,11 +25,13 @@ import windIcon from "../assets/icons/wind.svg";
 function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
   const [weatherFiveDays, setWeatherFiveDays] = useState(null);
+  const [weatherWeekDays, setWeatherWeekDays] = useState(null);
   const arr = [];
 
   //API KEY
 
   const key = import.meta.env.VITE_API_KEY;
+  const key2 = import.meta.env.VITE_API_KEY2;
 
   // WHEATHER ICON
   const iconMap = {
@@ -59,6 +61,7 @@ function Homepage({ city }) {
 
   useEffect(() => {
     if (city) {
+      fetchWeekDaysWeatherData(city);
       fetchWeatherData(city);
       fetchFiveDaysWeatherData(city);
     }
@@ -87,6 +90,20 @@ function Homepage({ city }) {
       });
       setWeatherFiveDays(arr);
       console.log(arr);
+    } catch (error) {
+      console.error("Errore nel recupero dei dati meteo:", error);
+    }
+  };
+
+  const fetchWeekDaysWeatherData = async (cityName) => {
+    try {
+      const response = await fetch(
+        `http://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`
+      );
+      const data = await response.json();
+
+      setWeatherWeekDays(data.forecast.forecastday);
+      console.log(weatherWeekDays);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -127,7 +144,7 @@ function Homepage({ city }) {
             </p>
 
             <div className="container mb-4">
-              <div className="d-flex w-100 text-center overflow-auto weatherFiveDays">
+              <div className="d-flex m-auto overflow-auto weatherFiveDays">
                 {weatherFiveDays ? (
                   weatherFiveDays.map((a, i) => {
                     const [dateStr, timeStr] = a.dt_txt.split(" ");
@@ -148,6 +165,31 @@ function Homepage({ city }) {
                   })
                 ) : (
                   <p>Caricamento..</p>
+                )}
+              </div>
+            </div>
+
+            <div className="container mb-4">
+              <div className="d-flex m-auto overflow-auto weatherWeekDays">
+                {weatherWeekDays ? (
+                  weatherWeekDays.map((day, i) => (
+                    <div key={i} className="me-3 text-center">
+                      <p className="m-0">
+                        {new Date(day.date).toLocaleDateString("it-IT", {
+                          weekday: "short",
+                          day: "2-digit",
+                          month: "2-digit",
+                        })}
+                      </p>
+                      <p className="m-0">
+                        {Math.round(day.day.mintemp_c)}° /{" "}
+                        {Math.round(day.day.maxtemp_c)}°
+                      </p>
+                      <p className="m-0">{day.day.condition.text}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>Caricamento previsioni settimanali...</p>
                 )}
               </div>
             </div>
