@@ -24,7 +24,7 @@ import windIcon from "../assets/icons/wind.svg";
 
 function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
-  const [weatherDataFiveDays, setWeatherDataFiveDays] = useState(null);
+  const arr = [];
 
   //API KEY
 
@@ -81,8 +81,10 @@ function Homepage({ city }) {
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`
       );
       const data = await response.json();
-      setWeatherDataFiveDays(data);
-      console.log(data);
+      data.list.slice(0, 10).forEach((item) => {
+        arr.push(item);
+      });
+      console.log(arr);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
