@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
 import locationIcon from "../assets/location-icon.png";
@@ -26,7 +26,8 @@ function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
 
   //API KEY
-  const key = "1b1a7d140962ca9867deae37cfeb542e";
+
+  const key = import.meta.env.VITE_API_KEY;
 
   // WHEATHER ICON
   const iconMap = {
@@ -76,7 +77,7 @@ function Homepage({ city }) {
     <div className="container">
       {weatherData ? (
         <div>
-          <div className="currentWeatherContainer container border border-1 rounded-4 p-3 ">
+          <div className="container p-3 ">
             <div className="d-flex justify-content-between align-items-center ">
               <div>
                 <p className="fs-3">

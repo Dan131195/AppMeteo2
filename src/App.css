@@ -11,26 +11,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  /* 🔵 Gradiente animato */
-  background: linear-gradient(-45deg, #1e3c72, #2a5298, #3766e7, #4e8af9);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-
-  transition: background 1s ease; /* utile per i cambi meteo dinamici */
-}
-
-/* ✨ Animazione del gradiente */
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background: linear-gradient(rgb(46, 46, 117), rgb(32, 72, 192));
 }
 
 #weatherApp > div:first-of-type {
@@ -62,10 +43,6 @@
 }
 
 /* HOMPAGE */
-
-.currentWeatherContainer {
-  background-color: #ffffff3a;
-}
 
 #weatherIcon {
   width: 8em;

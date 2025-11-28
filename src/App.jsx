@@ -8,7 +8,7 @@ import { useState } from "react";
 import Footer from "./components/Footer";
 
 function App() {
-  const [city, setCity] = useState("Roma");
+  const [city, setCity] = useState("Roma,it");
 
   return (
     <div id="weatherApp">
