@@ -24,7 +24,10 @@ import windIcon from "../assets/icons/wind.svg";
 
 function Homepage({ city }) {
   const [weatherData, setWeatherData] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [weatherDataFiveDays, setWeatherDataFiveDays] = useState(null);
+
+  const arr = [];
 
   //API KEY
 
@@ -81,8 +84,10 @@ function Homepage({ city }) {
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`
       );
       const data = await response.json();
-      setWeatherDataFiveDays(data);
-      console.log(data);
+      setWeatherDataFiveDays(data.list);
+      data.list.slice(0, 10).forEach((item) => {
+        arr.push(item);
+      });
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -122,6 +127,10 @@ function Homepage({ city }) {
                 {Math.floor(weatherData.main.temp_max)}°
               </span>
             </p>
+
+            <div className="container mb-4">
+              <div className="border border-1 border-light rounded-3"></div>
+            </div>
 
             <div className=" row row-cols-2 row-cols-lg-3">
               <div className=" ps-4 pe-2">
