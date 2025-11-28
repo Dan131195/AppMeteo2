@@ -60,8 +60,17 @@
   background-color: #ffffff25;
 }
 
-.detailsTitles {
-  font-size: 0.8em;
+.weatherFiveDays::-webkit-scrollbar {
+  height: 6px;
+}
+
+.weatherFiveDays::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 10px;
+}
+
+.cardsContainer {
+  font-size: 0.6em;
 }
 
 /* FOOOTER */

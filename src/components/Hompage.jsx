@@ -127,7 +127,7 @@ function Homepage({ city }) {
             </p>
 
             <div className="container mb-4">
-              <div className="d-flex overflow-auto">
+              <div className="d-flex overflow-auto weatherFiveDays">
                 {weatherFiveDays ? (
                   weatherFiveDays.map((a, i) => {
                     const [dateStr, timeStr] = a.dt_txt.split(" ");
@@ -138,11 +138,11 @@ function Homepage({ city }) {
                     return (
                       <div key={i} className="me-3 text-center">
                         <p className="m-0">{`${day}/${month}`}</p>
-                        <p className="m-0 mb-2">{time}</p>
-                        <p>
+                        <p className="m-0">
                           {" "}
                           <img src={getCustomIcon(a.weather[0].icon)} id="" />
                         </p>
+                        <p className="m-0 mb-1">{time}</p>
                       </div>
                     );
                   })
@@ -152,7 +152,7 @@ function Homepage({ city }) {
               </div>
             </div>
 
-            <div className=" row row-cols-2 row-cols-lg-3">
+            <div className="cardsContainer row row-cols-2 row-cols-lg-3">
               <div className=" ps-4 pe-2">
                 <div className="border border-1 border-light text-center rounded-4 py-2 detailsContainer">
                   <img src={windIcon} alt="Wind Icon" className="hompageIcon" />
