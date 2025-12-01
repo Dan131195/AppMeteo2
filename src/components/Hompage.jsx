@@ -46,7 +46,7 @@ function Homepage({ city }) {
     "09d": rain1,
     "09n": rain1,
     "10d": rain2,
-    "010n": rain2Night,
+    "10n": rain2Night,
     "11d": thunderstorm,
     "11n": thunderstorm,
     "13d": snow,
