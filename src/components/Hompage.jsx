@@ -19,7 +19,6 @@ import rain2 from "../assets/svg/rain2.svg";
 import snow from "../assets/svg/snow.svg";
 import thunderstorm from "../assets/svg/thunderstorm.svg";
 
-// import humidityIcon from "../assetsiconshumidity.svg";
 import thermometerIcon from "../assets/icons/thermometer.svg";
 import visibilityIcon from "../assets/icons/visibility.png";
 import windIcon from "../assets/icons/wind.svg";
@@ -313,11 +312,6 @@ function Homepage() {
 
                   <div className=" pe-4 ps-2">
                     <div className=" text-center rounded-4 py-2 bg-opacity">
-                      {/* <img
-                        src={humidityIcon}
-                        alt="Humidity Icon"
-                        className="hompageIcon"
-                      /> */}
                       <p className="m-0 fs-5 fw-bold m-0">
                         {weatherData.main.humidity}%
                       </p>
