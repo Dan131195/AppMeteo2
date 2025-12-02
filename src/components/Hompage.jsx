@@ -105,7 +105,7 @@ function Homepage() {
   const fetchWeekDaysWeatherData = async (cityName) => {
     try {
       const response = await fetch(
-        `http://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`
+        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`
       );
       const data = await response.json();
 
