@@ -19,10 +19,42 @@
   <div id="root">
 
   </div>
+
   <script type="module" src="/src/main.jsx"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
+
+
+
+  <!-- Sfondo dinamico ↓↓↓↓ -->
+  <!-- <script>
+
+    const weatherToVideo = {
+      day: {
+        clear: "videos/sky_clear_day.mp4",
+        clouds: "videos/sky_clouds_day.mp4",
+        rain: "videos/rain_day.mp4"
+      },
+      night: {
+        clear: "videos/sky_clear_night.mp4",
+        clouds: "videos/sky_clouds_night.mp4",
+        rain: "videos/rain_night.mp4"
+      }
+    };
+
+    function updateBackground(isNight, condition) {
+      const mode = isNight ? "night" : "day";
+      const path = weatherToVideo[mode][condition];
+      const video = document.getElementById("bg-video");
+      if (video.src !== path) {
+        video.src = path;
+        video.play();
+      }
+    }
+
+  </script> -->
+
 </body>
 
 </html>
