@@ -19,10 +19,6 @@ import rain2 from "../assets/svg/rain2.svg";
 import snow from "../assets/svg/snow.svg";
 import thunderstorm from "../assets/svg/thunderstorm.svg";
 
-import thermometerIcon from "../assets/icons/thermometer.svg";
-import visibilityIcon from "../assets/icons/visibility.png";
-import windIcon from "../assets/icons/wind.svg";
-
 function Homepage() {
   const [searchInput, setSearchInput] = useState("");
   const [city, setCity] = useState("Rome,it");
@@ -298,11 +294,6 @@ function Homepage() {
                 <div className="cardsContainer row row-cols-2 row-cols-lg-3">
                   <div className=" ps-4 pe-2">
                     <div className=" text-center rounded-4 py-2 bg-opacity ">
-                      <img
-                        src={windIcon}
-                        alt="Wind Icon"
-                        className="hompageIcon"
-                      />
                       <p className="m-0 fs-5 fw-bold">
                         {Math.floor(weatherData.wind.speed)} Km/h
                       </p>
@@ -321,11 +312,6 @@ function Homepage() {
 
                   <div className="py-3 ps-4 pe-2">
                     <div className=" text-center rounded-4 py-2 bg-opacity">
-                      <img
-                        src={visibilityIcon}
-                        alt="Humidity Icon"
-                        className="hompageIcon"
-                      />
                       <p className="m-0 fs-5 fw-bold m-0">
                         {weatherData.visibility} m
                       </p>
@@ -335,11 +321,6 @@ function Homepage() {
 
                   <div className="py-3 pe-4 ps-2">
                     <div className=" text-center rounded-4 py-2 bg-opacity">
-                      <img
-                        src={thermometerIcon}
-                        alt="Humidity Icon"
-                        className="hompageIcon"
-                      />
                       <p className="m-0 fs-5 fw-bold m-0">
                         {weatherData.main.pressure} hpA
                       </p>
