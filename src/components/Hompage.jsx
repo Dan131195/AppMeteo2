@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from "react";
-import locationIcon from "../assets/location-icon.png";
 
+import locationIcon from "../assets/location--icon.png";
 import skyCloudsDay from "../assets/videos/sky_clouds_day.mp4";
 
 // WHEATHER ICON
@@ -129,7 +129,14 @@ function Homepage() {
 
   return (
     <div id="weather-app">
-      <video id="bg-video" src={skyCloudsDay} ref={videoRef} muted loop></video>
+      <video
+        id="bg-video"
+        className=" opacity-50"
+        src={skyCloudsDay}
+        ref={videoRef}
+        muted
+        loop
+      ></video>
       <div className="content">
         <div className="container">
           <nav className="navbar navbar-expand-sm">
@@ -175,7 +182,7 @@ function Homepage() {
                     onChange={(e) => setSearchInput(e.target.value)}
                   />
                   <button className="btn" type="submit">
-                    <i class="bi bi-arrow-right fs-3"></i>
+                    <i className="bi bi-arrow-right fs-3"></i>
                   </button>
                 </form>
               </div>
@@ -188,14 +195,18 @@ function Homepage() {
                 <div className="bg-opacity rounded-4">
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
-                      <p className="fs-3">
-                        <img src={locationIcon} />
+                      <p className="fs-3 m-0">
                         {weatherData.name}{" "}
                         <span className=" fs-6 opacity-75">
                           ({weatherData.sys.country})
                         </span>
                       </p>
-                      <p className="display-1 ps-2">
+                      <img
+                        src={locationIcon}
+                        className="locationIcon m-0 p-0"
+                        alt="Location Icon"
+                      />
+                      <p className="display-1 ps-3">
                         {Math.floor(weatherData.main.temp)}°
                       </p>
                     </div>
@@ -207,7 +218,7 @@ function Homepage() {
                       id="weatherIcon"
                     />
                   </div>
-                  <p className="fs-5 ps-2 capitalize-first">
+                  <p className="fs-5 ps-2 pb-2 capitalize-first">
                     {weatherData.weather[0].description}
                     <span className="ps-2">
                       {Math.floor(weatherData.main.temp_min)}° /{" "}
@@ -233,7 +244,7 @@ function Homepage() {
                               {" "}
                               <img
                                 src={getCustomIcon(a.weather[0].icon)}
-                                id=""
+                                className="iconThreeHours"
                               />
                             </p>
                             <p>{Math.floor(a.main.temp)}°</p>

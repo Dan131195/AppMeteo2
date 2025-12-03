@@ -7,13 +7,6 @@
   font-size: 1em;
 }
 
-/* #weatherApp {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(rgb(46, 46, 117), rgb(32, 72, 192));
-} */
-
 #weatherApp > div:first-of-type {
   flex: 1;
 }
@@ -52,7 +45,30 @@
   opacity: 0.5;
 }
 
-/* HOMPAGE */
+/* MAIN */
+
+#weather-app {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+}
+#bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.7;
+}
+.content {
+  position: relative;
+  z-index: 1000;
+}
+
+.locationIcon {
+  width: 20px;
+}
 
 #weatherIcon {
   width: 8em;
@@ -83,23 +99,6 @@
   font-size: 0.6em;
 }
 
-/* FOOOTER */
-
-#weather-app {
-  position: relative;
-  width: 100vw;
-  height: 100%;
-}
-#bg-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0.7;
-}
-.content {
-  position: relative;
-  z-index: 1000;
+.iconThreeHours {
+  scale: 1.5;
 }
