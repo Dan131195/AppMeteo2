@@ -25,7 +25,9 @@ function Homepage() {
   const [weatherData, setWeatherData] = useState(null);
   const [weatherFiveDays, setWeatherFiveDays] = useState(null);
   const [weatherWeekDays, setWeatherWeekDays] = useState(null);
+
   const arr = [];
+
 
   //API KEY
 
