@@ -96,7 +96,6 @@ function Homepage() {
         arr.push(item);
       });
       setWeatherFiveDays(arr);
-      console.log("Five days : " + arr);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -110,7 +109,6 @@ function Homepage() {
       const data = await response.json();
 
       setWeatherWeekDays(data.forecast.forecastday);
-      console.log(weatherWeekDays);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -133,7 +131,6 @@ function Homepage() {
     <div id="weather-app">
       <video id="bg-video" src={skyCloudsDay} ref={videoRef} muted loop></video>
       <div className="content">
-        {console.log(weatherFiveDays)}
         <div className="container">
           <nav className="navbar navbar-expand-sm">
             <div className="container-fluid d-flex justify-content-between">
@@ -159,17 +156,18 @@ function Homepage() {
                   <i className="bi bi-search fw-bold"></i>
                 </span>
               </button>
+
               <div
-                className="collapse navbar-collapse"
+                className="collapse navbar-collapse my-2"
                 id="navbarSupportedContent"
               >
                 <form
-                  className="d-flex justify-content-center align-items-center justify-content-sm-end w-100 py-2 ms-sm-3"
+                  className="bg-opacity rounded-4 w-100 d-flex justify-content-center align-items-center justify-content-sm-end w-100 py-2 ms-sm-3"
                   role="search"
                   onSubmit={handleSubmit}
                 >
                   <input
-                    className="form-control me-2 bg-transparent text-light"
+                    className="form-control  me-2 bg-transparent text-light"
                     type="search"
                     placeholder="Search..."
                     aria-label="Search"
@@ -177,7 +175,7 @@ function Homepage() {
                     onChange={(e) => setSearchInput(e.target.value)}
                   />
                   <button className="btn" type="submit">
-                    <i className="bi bi-search fs-3"></i>
+                    <i class="bi bi-arrow-right fs-3"></i>
                   </button>
                 </form>
               </div>
@@ -187,8 +185,8 @@ function Homepage() {
           {weatherData ? (
             <main>
               <div className="container p-3 ">
-                <div className="bg-opacity rounded-4 ">
-                  <div className="d-flex justify-content-between align-items-center ">
+                <div className="bg-opacity rounded-4">
+                  <div className="d-flex justify-content-between align-items-center">
                     <div>
                       <p className="fs-3">
                         <img src={locationIcon} />
