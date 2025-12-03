@@ -187,34 +187,36 @@ function Homepage() {
           {weatherData ? (
             <main>
               <div className="container p-3 ">
-                <div className="d-flex justify-content-between align-items-center ">
-                  <div>
-                    <p className="fs-3">
-                      <img src={locationIcon} />
-                      {weatherData.name}{" "}
-                      <span className=" fs-6 opacity-75">
-                        ({weatherData.sys.country})
-                      </span>
-                    </p>
-                    <p className="display-1 ps-2">
-                      {Math.floor(weatherData.main.temp)}°
-                    </p>
-                  </div>
+                <div className="bg-opacity rounded-4 ">
+                  <div className="d-flex justify-content-between align-items-center ">
+                    <div>
+                      <p className="fs-3">
+                        <img src={locationIcon} />
+                        {weatherData.name}{" "}
+                        <span className=" fs-6 opacity-75">
+                          ({weatherData.sys.country})
+                        </span>
+                      </p>
+                      <p className="display-1 ps-2">
+                        {Math.floor(weatherData.main.temp)}°
+                      </p>
+                    </div>
 
-                  {/* Per selezionare le icone personalizzate con la funzione */}
-                  <img
-                    src={getCustomIcon(weatherData.weather[0].icon)}
-                    alt={weatherData.weather[0].description}
-                    id="weatherIcon"
-                  />
+                    {/* Per selezionare le icone personalizzate con la funzione */}
+                    <img
+                      src={getCustomIcon(weatherData.weather[0].icon)}
+                      alt={weatherData.weather[0].description}
+                      id="weatherIcon"
+                    />
+                  </div>
+                  <p className="fs-5 ps-2 capitalize-first">
+                    {weatherData.weather[0].description}
+                    <span className="ps-2">
+                      {Math.floor(weatherData.main.temp_min)}° /{" "}
+                      {Math.floor(weatherData.main.temp_max)}°
+                    </span>
+                  </p>
                 </div>
-                <p className="fs-5 ps-2 capitalize-first">
-                  {weatherData.weather[0].description}
-                  <span className="ps-2">
-                    {Math.floor(weatherData.main.temp_min)}° /{" "}
-                    {Math.floor(weatherData.main.temp_max)}°
-                  </span>
-                </p>
 
                 {/* Meteo 3h x 3h barra orizzontale */}
 
