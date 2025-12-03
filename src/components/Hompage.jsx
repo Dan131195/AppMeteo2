@@ -116,7 +116,7 @@ function Homepage() {
     }
   };
 
-  // Sfondo dinamico autoplay forzato..
+  // Sfondo dinamico autoplay forzato
 
   const videoRef = useRef(null);
 
