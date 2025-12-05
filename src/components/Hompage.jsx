@@ -196,21 +196,30 @@ function Homepage() {
               <div className="container p-3 ">
                 <div className="bg-opacity rounded-4">
                   <div className="d-flex justify-content-between align-items-center">
-                    <div>
-                      <p className="fs-3 m-0">
+                    <div className="ps-2">
+
+                      <p className="fs-3 m-0"><img
+                        src={locationIcon}
+                        className="locationIcon m-0 p-0"
+                        alt="Location Icon"
+                      />
                         {weatherData.name}{" "}
                         <span className=" fs-6 opacity-75">
                           ({weatherData.sys.country})
                         </span>
                       </p>
-                      <img
-                        src={locationIcon}
-                        className="locationIcon m-0 p-0"
-                        alt="Location Icon"
-                      />
+                      
                       <p className="display-1 ps-3">
                         {Math.floor(weatherData.main.temp)}°
                       </p>
+                      
+                      <p className="fs-5 ps-2 pb-2 capitalize-first">
+                    {weatherData.weather[0].description}
+                    <span className="ps-2">
+                      {Math.floor(weatherData.main.temp_min)}° /{" "}
+                      {Math.floor(weatherData.main.temp_max)}°
+                    </span>
+                  </p>
                     </div>
 
                     {/* Per selezionare le icone personalizzate con la funzione */}
@@ -220,13 +229,7 @@ function Homepage() {
                       id="weatherIcon"
                     />
                   </div>
-                  <p className="fs-5 ps-2 pb-2 capitalize-first">
-                    {weatherData.weather[0].description}
-                    <span className="ps-2">
-                      {Math.floor(weatherData.main.temp_min)}° /{" "}
-                      {Math.floor(weatherData.main.temp_max)}°
-                    </span>
-                  </p>
+                  
                 </div>
 
                 {/* Meteo 3h x 3h barra orizzontale */}
