@@ -8,13 +8,11 @@ function App() {
   return (
     <div id="weatherApp">
       <BrowserRouter>
-        <div id="mainContent">
-          <Routes>
-            <Route path="/" element={<Hompage />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Hompage />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

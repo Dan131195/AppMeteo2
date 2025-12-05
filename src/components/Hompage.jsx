@@ -28,7 +28,6 @@ function Homepage() {
 
   const arr = [];
 
-
   //API KEY
 
   const key = import.meta.env.VITE_API_KEY;
@@ -141,7 +140,7 @@ function Homepage() {
       ></video>
       <div className="content">
         <div>
-          <nav className="navbar navbar-expand-sm">
+          <nav className="navbar navbar-expand-lg container">
             <div className="container-fluid d-flex justify-content-between">
               <p className="navbar-brand m-0 text-light fw-bold">
                 <img
@@ -171,20 +170,20 @@ function Homepage() {
                 id="navbarSupportedContent"
               >
                 <form
-                  className="bg-opacity rounded-4 w-100 d-flex justify-content-center align-items-center justify-content-sm-end w-100 py-2 ms-sm-3"
+                  className="bg-opacity rounded-4 w-100 d-flex justify-content-center align-items-center  w-100 py-2"
                   role="search"
                   onSubmit={handleSubmit}
                 >
                   <input
-                    className="form-control  me-2 bg-transparent text-light"
+                    className="form-control bg-transparent text-light"
                     type="search"
-                    placeholder="Search..."
+                    placeholder="Es. Londra,gb"
                     aria-label="Search"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                   />
                   <button className="btn" type="submit">
-                    <i className="bi bi-arrow-right fs-3"></i>
+                    <i className="bi bi-arrow-right-circle fs-3"></i>
                   </button>
                 </form>
               </div>
@@ -192,34 +191,34 @@ function Homepage() {
           </nav>
 
           {weatherData ? (
-            <main>
+            <main className="text-center">
               <div className="container p-3 ">
-                <div className="bg-opacity rounded-4">
+                <div className="bg-opacity rounded-4 mb-3">
                   <div className="d-flex justify-content-between align-items-center">
-                    <div className="ps-2">
-
-                      <p className="fs-3 m-0"><img
-                        src={locationIcon}
-                        className="locationIcon m-0 p-0"
-                        alt="Location Icon"
-                      />
+                    <div className="-2">
+                      <p className="fs-1 m-0">
+                        <img
+                          src={locationIcon}
+                          className="locationIcon m-0 p-0"
+                          alt="Location Icon"
+                        />
                         {weatherData.name}{" "}
                         <span className=" fs-6 opacity-75">
                           ({weatherData.sys.country})
                         </span>
                       </p>
-                      
+
                       <p className="display-1 ps-3">
                         {Math.floor(weatherData.main.temp)}°
                       </p>
-                      
-                      <p className="fs-5 ps-2 pb-2 capitalize-first">
-                    {weatherData.weather[0].description}
-                    <span className="ps-2">
-                      {Math.floor(weatherData.main.temp_min)}° /{" "}
-                      {Math.floor(weatherData.main.temp_max)}°
-                    </span>
-                  </p>
+
+                      <p className="fs-5 ps-3 pb-2 capitalize-first">
+                        {weatherData.weather[0].description}
+                        <span className="ps-2">
+                          {Math.floor(weatherData.main.temp_min)}° /{" "}
+                          {Math.floor(weatherData.main.temp_max)}°
+                        </span>
+                      </p>
                     </div>
 
                     {/* Per selezionare le icone personalizzate con la funzione */}
@@ -229,7 +228,6 @@ function Homepage() {
                       id="weatherIcon"
                     />
                   </div>
-                  
                 </div>
 
                 {/* Meteo 3h x 3h barra orizzontale */}
