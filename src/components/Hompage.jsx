@@ -133,14 +133,14 @@ function Homepage() {
     <div id="weather-app">
       <video
         id="bg-video"
-        className=" opacity-50"
+        className="w-100 opacity-50"
         src={skyCloudsDay}
         ref={videoRef}
         muted
         loop
       ></video>
       <div className="content">
-        <div className="container">
+        <div>
           <nav className="navbar navbar-expand-sm">
             <div className="container-fluid d-flex justify-content-between">
               <p className="navbar-brand m-0 text-light fw-bold">
