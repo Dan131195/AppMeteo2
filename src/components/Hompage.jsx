@@ -78,7 +78,7 @@ function Homepage() {
   const fetchWeatherData = async (cityName) => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=it&units=metric&appid=${key}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
       const data = await response.json();
       setWeatherData(data);
@@ -90,7 +90,7 @@ function Homepage() {
   const fetchFiveDaysWeatherData = async (cityName) => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
       const data = await response.json();
       data.list.slice(0, 10).forEach((item) => {
@@ -105,7 +105,7 @@ function Homepage() {
   const fetchWeekDaysWeatherData = async (cityName) => {
     try {
       const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`
+        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`,
       );
       const data = await response.json();
 
@@ -115,18 +115,18 @@ function Homepage() {
     }
   };
 
-  // Sfondo dinamico autoplay forzato
+  // Sfondo dinamico autoplay forzato (PER METTERE LIVE WALLPAPER)
 
-  const videoRef = useRef(null);
+  /* const videoRef = useRef(null); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.5;
       videoRef.current.play().catch((err) => {
         console.error("Autoplay bloccato:", err);
       });
     }
-  }, []);
+  }, []); */
 
   return (
     <div id="weather-app">
