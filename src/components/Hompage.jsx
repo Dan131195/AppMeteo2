@@ -293,8 +293,8 @@ function Homepage() {
 
                 {/*Card meteo settimanale (6 giorni)  */}
 
-                <div className="container bg-opacity rounded-4 mb-4 ">
-                  {/* <div className=" weatherWeekDays">
+                {/* <div className="container bg-opacity rounded-4 mb-4 ">
+                  <div className=" weatherWeekDays">
                     {weatherWeekDays ? (
                       weatherWeekDays.map((day, i) => {
                         const d = new Date(day.date);
@@ -331,8 +331,8 @@ function Homepage() {
                     ) : (
                       <p>Caricamento previsioni settimanali...</p>
                     )}
-                  </div> */}
-                </div>
+                  </div>
+                </div> */}
 
                 {/* CARDS Informazioni aggiuntive */}
 
