@@ -26,6 +26,9 @@ function Homepage() {
   const [weatherFiveDays, setWeatherFiveDays] = useState(null);
   const [weatherWeekDays, setWeatherWeekDays] = useState(null);
 
+  const isNight = new Date().getHours() >= 20 || new Date().getHours() < 6;
+  console.log(isNight);
+
   const arr = [];
 
   //API KEY
