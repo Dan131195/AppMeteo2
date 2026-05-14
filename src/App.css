@@ -3,7 +3,9 @@
   margin: 0;
   padding: 0;
   color: #fff;
-  font-family: "Segoe UI", "Roboto" sans-serif;
+  font-family:
+    "Segoe UI",
+    "Roboto" sans-serif;
   font-size: 1em;
 }
 
@@ -11,8 +13,8 @@
   flex: 1;
 }
 
-#main-content {
-  flex: 1;
+#weatherApp {
+  background-color: #3e8ccc;
 }
 
 /* NAVBAR */

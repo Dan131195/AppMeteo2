@@ -104,16 +104,47 @@ function Homepage() {
 
   const fetchWeekDaysWeatherData = async (cityName) => {
     try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`,
+      // Step 1: city name → coordinate (geocoding gratuito)
+      const cityName2 = cityName.split(",")[0];
+      const geoRes = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${cityName2}&count=1&language=it`,
       );
-      const data = await response.json();
+      const geoData = await geoRes.json();
 
-      setWeatherWeekDays(data.forecast.forecastday);
+      if (!geoData.results || geoData.results.length === 0) {
+        console.error("Città non trovata:", cityName);
+        return;
+      }
+
+      const { latitude, longitude } = geoData.results[0];
+
+      // Step 2: forecast 7 giorni
+      const res = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max&timezone=auto&forecast_days=7`,
+      );
+      const data = await res.json();
+      console.log(data);
+      setWeatherWeekDays(data);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
   };
+
+  /*  const fetchWeekDaysWeatherData = async (cityName) => {
+    try {
+      const response = await fetch(
+        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it` 
+
+        `https://api.openweathermap.org/data/2.5/forecast/daily?q=${cityName}&cnt={6}&appid=${key}`,
+      );
+
+      const data = await response.json();
+      console.log(data);
+      setWeatherWeekDays(data);
+    } catch (error) {
+      console.error("Errore nel recupero dei dati meteo:", error);
+    }
+  }; */
 
   // Sfondo dinamico autoplay forzato (PER METTERE LIVE WALLPAPER)
 
@@ -130,14 +161,14 @@ function Homepage() {
 
   return (
     <div id="weather-app">
-      <video
+      {/* <video
         id="bg-video"
         className="w-100 opacity-50"
         src={skyCloudsDay}
         ref={videoRef}
         muted
         loop
-      ></video>
+      ></video> */}
       <div className="content">
         <div>
           <nav className="navbar navbar-expand-lg container">
@@ -263,7 +294,7 @@ function Homepage() {
                 {/*Card meteo settimanale (6 giorni)  */}
 
                 <div className="container bg-opacity rounded-4 mb-4 ">
-                  <div className=" weatherWeekDays">
+                  {/* <div className=" weatherWeekDays">
                     {weatherWeekDays ? (
                       weatherWeekDays.map((day, i) => {
                         const d = new Date(day.date);
@@ -300,7 +331,7 @@ function Homepage() {
                     ) : (
                       <p>Caricamento previsioni settimanali...</p>
                     )}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* CARDS Informazioni aggiuntive */}
