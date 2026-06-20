@@ -450,15 +450,22 @@ function Homepage() {
                           day: "numeric",
                         });
                         const mese = d.toLocaleDateString("it-IT", {
-                          month: "short",
+                          month: "2-digit",
                         });
+
+                        const giornoGrezzo = d
+                          .toLocaleDateString("it-IT", { weekday: "short" })
+                          .replace(".", "");
+                        const giornoSettimana =
+                          giornoGrezzo.charAt(0).toUpperCase() +
+                          giornoGrezzo.slice(1);
 
                         return (
                           <div
                             key={i}
                             className=" d-flex align-items-center justify-content-between"
                           >
-                            <p className="m-0">{`${giorno} ${mese} `}</p>
+                            <p className="m-0">{`${giorno}/${mese} ${giornoSettimana}`}</p>
 
                             <img
                               src={getMeteoIcon(day.day.condition_code)}
