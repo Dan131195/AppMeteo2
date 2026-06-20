@@ -38,7 +38,7 @@ function Homepage() {
 
   //API KEY
 
-  const key = import.meta.env.VITE_API_KEY;
+  const key = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
   // WHEATHER ICON
   const iconMap = {
