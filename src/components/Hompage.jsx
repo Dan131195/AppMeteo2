@@ -395,7 +395,6 @@ function Homepage() {
                   <div className="d-flex m-auto overflow-auto weatherFiveDays px-2">
                     {weatherFiveDays ? (
                       weatherFiveDays.map((a, i) => {
-                        // eslint-disable-next-line no-unused-vars
                         const [dateStr, timeStr] = a.dt_txt.split(" ");
                         const time = timeStr.slice(0, 5);
 
