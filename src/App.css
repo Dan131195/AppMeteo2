@@ -80,12 +80,12 @@ form {
   background-color: #00000074;
 }
 
-.weatherFiveDays::-webkit-scrollbar {
+.weatherTrheeHours::-webkit-scrollbar {
   height: 6px;
 }
 
-.weatherFiveDays::-webkit-scrollbar-thumb {
-  background: #999;
+.weatherTrheeHours::-webkit-scrollbar-thumb {
+  background: #6a6a6a;
   border-radius: 10px;
 }
 

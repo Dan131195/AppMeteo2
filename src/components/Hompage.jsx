@@ -30,7 +30,7 @@ function Homepage() {
   const [searchInput, setSearchInput] = useState("");
   const [city, setCity] = useState("Firenze");
   const [weatherData, setWeatherData] = useState(null);
-  const [weatherFiveDays, setWeatherFiveDays] = useState(null);
+  const [weatherTrheeHours, setWeatherTrheeHours] = useState(null);
   const [weatherWeekDays, setWeatherWeekDays] = useState(null);
   const [backgroundUrl, setBackgroundUrl] = useState("");
 
@@ -45,7 +45,6 @@ function Homepage() {
   const arr = [];
 
   //API KEY
-
   const key = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
   // WHEATHER ICON
@@ -110,7 +109,7 @@ function Homepage() {
     "01d":
       "https://i.pinimg.com/736x/e1/3a/4d/e13a4d737425141353603f7a3edb73cd.jpg",
     "01n":
-      "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1508402476522-c77c2fa4479d?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG5pZ2h0JTIwc2t5JTIwd2FsbHBhcGVyfGVufDB8fDB8fHww",
 
     "02d":
       "https://media.baamboozle.com/uploads/images/150883/1657429562_160152.jpeg",
@@ -121,6 +120,7 @@ function Homepage() {
       "https://img.magnific.com/free-photo/dramatic-landscape-view-with-sun-rays-shining-through-dark-cloudy-sky_181624-45676.jpg?semt=ais_hybrid&w=740&q=80",
     "03n":
       "https://images.unsplash.com/photo-1603288967520-f3e04381dc02?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xvdWR5JTIwbmlnaHR8ZW58MHx8MHx8fDA%3D",
+
     "04d":
       "https://images.unsplash.com/photo-1594156596782-656c93e4d504?w=1200&auto=format&fit=crop",
     "04n":
@@ -130,13 +130,16 @@ function Homepage() {
       "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=1200&auto=format&fit=crop",
     "09n":
       "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=1200&auto=format&fit=crop",
+
     "10d": "https://wallpapercave.com/wp/wp7098061.jpg",
     "10n":
       "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=1200&auto=format&fit=crop",
+
     "11d":
       "https://media.istockphoto.com/id/1098124180/photo/lightning-strike-from-a-thunderstorm.jpg?s=612x612&w=0&k=20&c=cY9qHJWG1AVtcUVWbXFFfeBxb4C7y-SrgK4nC9jU9MA=",
     "11n":
       "https://cloudfront-us-east-1.images.arcpublishing.com/gray/LARRIZM7UFJOZBL27NYSWT73JI.jpg",
+
     "13d":
       "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1200&auto=format&fit=crop",
     "13n":
@@ -146,6 +149,7 @@ function Homepage() {
       "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?w=1200&auto=format&fit=crop",
     "50n":
       "https://w0.peakpx.com/wallpaper/428/576/HD-wallpaper-foggy-night-foggy-night-fog-woman-street-lights-weather-people-mood-alone.jpg",
+
     default:
       "https://img.magnific.com/free-vector/beautiful-dreamy-night-cloudy-sky-background_1017-62567.jpg",
   };
@@ -214,7 +218,8 @@ function Homepage() {
       data.list.slice(0, 12).forEach((item) => {
         arr.push(item);
       });
-      setWeatherFiveDays(arr);
+      setWeatherTrheeHours(arr);
+      console.log(arr);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -358,7 +363,7 @@ function Homepage() {
           {weatherData && !error && (
             <main className="text-center">
               <div className="container p-3 ">
-                <div className="bg-opacity rounded-4 mb-3">
+                <div className="bg-opacity rounded-4 mb-3 pt-2">
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="ps-4">
                       <p className="fs-1 m-0">
@@ -397,22 +402,27 @@ function Homepage() {
                 {/* Meteo 3h x 3h barra orizzontale */}
 
                 <div className="container bg-opacity rounded-4 mb-4 pt-2 text-center">
-                  <div className="d-flex m-auto overflow-auto weatherFiveDays px-2">
-                    {weatherFiveDays ? (
-                      weatherFiveDays.map((a, i) => {
+                  <div className="d-flex m-auto overflow-auto weatherTrheeHours px-2">
+                    {weatherTrheeHours ? (
+                      weatherTrheeHours.map((a, i) => {
                         const [dateStr, timeStr] = a.dt_txt.split(" ");
+                        const date = a.dt_txt.split(" ")[0].split("-");
                         const time = timeStr.slice(0, 5);
 
                         return (
-                          <div key={i} className="me-3 text-center">
-                            <p className="my-1">{time}</p>
-                            <p className="m-0">
+                          <div
+                            key={i}
+                            className="mx-3 text-center d-flex flex-column justify-content-between "
+                          >
+                            <p className="m-0">{`${date[2]}/${date[1]}`}</p>
+                            <p className="">{time}</p>
+                            <div className="mb-1">
                               {" "}
                               <img
                                 src={getCustomIcon(a.weather[0].icon)}
                                 className="iconThreeHours"
                               />
-                            </p>
+                            </div>
                             <p>{Math.floor(a.main.temp)}°</p>
                           </div>
                         );
