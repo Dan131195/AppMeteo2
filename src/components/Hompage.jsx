@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
 import locationIcon from "../assets/location--icon.png";
-// import skyCloudsDay from "../assets/videos/sky_clouds_day.mp4";
 
 // WHEATHER ICON
 import WeatherAppIcon from "../assets/meteo-icona.png";
@@ -19,6 +19,8 @@ import rain2 from "../assets/svg/rain2.svg";
 import snow from "../assets/svg/snow.svg";
 import thunderstorm from "../assets/svg/thunderstorm.svg";
 
+import locationNotFound from "../assets/img/location-not-found.png";
+
 function Homepage() {
   const [searchInput, setSearchInput] = useState("");
   const [city, setCity] = useState("Rome,it");
@@ -29,12 +31,14 @@ function Homepage() {
 
   const [error, setError] = useState(null);
 
+  const [sunrise, setSunrise] = useState("--:--");
+  const [sunset, setSunset] = useState("--:--");
+
   const arr = [];
 
   //API KEY
 
   const key = import.meta.env.VITE_API_KEY;
-  const key2 = import.meta.env.VITE_API_KEY2;
 
   // WHEATHER ICON
   const iconMap = {
@@ -56,6 +60,41 @@ function Homepage() {
     "13n": snow,
     "50d": mist,
     "50n": mist,
+  };
+
+  const getMeteoIcon = (wmoCode) => {
+    const icone = {
+      0: clearDay,
+      1: clearDay,
+      2: clearDay,
+      3: cloudy,
+      45: mist,
+      48: mist,
+      51: rain2,
+      53: rain1,
+      55: rain1,
+      56: rain2,
+      57: rain2,
+      61: rain2,
+      63: rain1,
+      65: thunderstorm,
+      66: rain2,
+      67: rain2,
+      71: snow,
+      73: snow,
+      75: snow,
+      77: snow,
+      80: rain2,
+      81: rain1,
+      82: rain1,
+      85: snow,
+      86: snow,
+      95: thunderstorm,
+      96: thunderstorm,
+      99: thunderstorm,
+    };
+
+    return icone[wmoCode];
   };
 
   // WEATHER BACKGROUNDS
@@ -134,7 +173,6 @@ function Homepage() {
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
       const data = await response.json();
-      console.log(data);
 
       if (data.cod === "404" || response.status === 404) {
         setError("Città non trovata. Riprova con un altro nome.");
@@ -154,6 +192,7 @@ function Homepage() {
       }
 
       setWeatherData(data);
+      sunriseSunset(data.sys.sunrise, data.sys.sunset);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -176,29 +215,40 @@ function Homepage() {
 
   const fetchWeekDaysWeatherData = async (cityName) => {
     try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`,
+      const city = cityName.split(",")[0];
+      const geoResponse = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=it`,
       );
-      const data = await response.json();
 
-      setWeatherWeekDays(data.forecast.forecastday);
+      const geoData = await geoResponse.json();
+
+      if (!geoData.results || geoData.results.length === 0) {
+        throw new Error(`Città "${cityName}" non trovata`);
+      }
+
+      const { latitude, longitude } = geoData.results[0];
+
+      const weatherResponse = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`,
+      );
+      const weatherData = await weatherResponse.json();
+
+      const forecastday = weatherData.daily.time.map((dataGiorno, index) => {
+        return {
+          date: dataGiorno, // es. "2026-06-20"
+          day: {
+            maxtemp_c: weatherData.daily.temperature_2m_max[index],
+            mintemp_c: weatherData.daily.temperature_2m_min[index],
+            condition_code: weatherData.daily.weather_code[index],
+          },
+        };
+      });
+
+      setWeatherWeekDays(forecastday);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
   };
-
-  // Sfondo dinamico autoplay forzato
-
-  // const videoRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (videoRef.current) {
-  //     videoRef.current.playbackRate = 0.5;
-  //     videoRef.current.play().catch((err) => {
-  //       console.error("Autoplay bloccato:", err);
-  //     });
-  //   }
-  // }, []);
 
   const containerStyle = {
     backgroundImage: backgroundUrl
@@ -207,19 +257,21 @@ function Homepage() {
     backgroundSize: "cover",
     backgroundPosition: "center",
     transition: "background-image 0.5s ease-in-out",
-    minHeight: "100vh", // o l'altezza che serve alla tua app
+    minHeight: "100vh",
+  };
+
+  const sunriseSunset = (sunriseSec, sunsetSec) => {
+    const opzioni = { hour: "2-digit", minute: "2-digit" };
+
+    const sunriseObj = new Date(sunriseSec * 1000);
+    const sunsetObj = new Date(sunsetSec * 1000);
+
+    setSunrise(sunriseObj.toLocaleTimeString("it-IT", opzioni));
+    setSunset(sunsetObj.toLocaleTimeString("it-IT", opzioni));
   };
 
   return (
     <div style={containerStyle} id="weather-app">
-      {/* <video
-        id="bg-video"
-        className="w-100 opacity-50"
-        src={skyCloudsDay}
-        ref={videoRef}
-        muted
-        loop
-      ></video> */}
       <div className="content">
         <div>
           <nav className="navbar navbar-expand-lg container">
@@ -252,7 +304,7 @@ function Homepage() {
                 id="navbarSupportedContent"
               >
                 <form
-                  className="bg-opacity rounded-4 w-100 d-flex justify-content-center align-items-center  w-100 py-2"
+                  className=" rounded-4 w-100 d-flex justify-content-center align-items-center  w-100 py-2"
                   role="search"
                   onSubmit={handleSubmit}
                 >
@@ -272,11 +324,13 @@ function Homepage() {
             </div>
           </nav>
 
+          {/* Errore caricamento citta  CITTà NON TROVATA */}
           {error && (
             <div
               className="error-banner"
               style={{ color: "red", textAlign: "center", margin: "20px" }}
             >
+              <img src={locationNotFound} alt="" width={200} />
               <p>{error}</p>
             </div>
           )}
@@ -365,6 +419,49 @@ function Homepage() {
                         const mese = d.toLocaleDateString("it-IT", {
                           month: "short",
                         });
+
+                        return (
+                          <div
+                            key={i}
+                            className="me-3 d-flex align-items-center justify-content-between"
+                          >
+                            <p className="m-0">{`${giorno} ${mese} `}</p>
+
+                            <img
+                              src={getMeteoIcon(day.day.condition_code)}
+                              alt="Icona meteo"
+                              style={{
+                                width: "80px",
+                                height: "80px",
+                                objectFit: "contain",
+                              }}
+                            />
+
+                            <p className="m-0">
+                              {Math.round(day.day.mintemp_c)}° /{" "}
+                              {Math.round(day.day.maxtemp_c)}°
+                            </p>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p>Caricamento previsioni settimanali...</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* <div className="container bg-opacity rounded-4 mb-4 ">
+                  <div className=" weatherWeekDays">
+                    {weatherWeekDays ? (
+                      weatherWeekDays.map((day, i) => {
+                        const d = new Date(day.date);
+
+                        const giorno = d.toLocaleDateString("it-IT", {
+                          day: "numeric",
+                        });
+                        const mese = d.toLocaleDateString("it-IT", {
+                          month: "short",
+                        });
                         const settimana = d.toLocaleDateString("it-IT", {
                           weekday: "short",
                         });
@@ -392,7 +489,7 @@ function Homepage() {
                       <p>Caricamento previsioni settimanali...</p>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* CARDS Informazioni aggiuntive */}
 
@@ -430,6 +527,56 @@ function Homepage() {
                         {weatherData.main.pressure} hpA
                       </p>
                       <p className="detailsTitles m-0 opacity-75">PERCEPITA</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-opacity rounded-4 p-3 mt-3">
+                  <p className="fw-bold mb-3">Ciclo Solare</p>
+
+                  <div className="d-flex flex-column align-items-center text-light">
+                    {/* SVG dell'arco */}
+                    <svg
+                      viewBox="0 0 200 100"
+                      width="100%"
+                      style={{ maxWidth: "250px", overflow: "visible" }}
+                    >
+                      {/* Linea dell'orizzonte */}
+                      <line
+                        x1="10"
+                        y1="90"
+                        x2="190"
+                        y2="90"
+                        stroke="#888"
+                        strokeWidth="2"
+                      />
+
+                      {/* Arco del sole */}
+                      <path
+                        d="M 20 90 A 80 80 0 0 1 180 90"
+                        fill="none"
+                        stroke="#ffb803c7"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeDasharray="7 7"
+                      />
+
+                      {/* Icona Sole (posizionata ipoteticamente al centro/mezzogiorno) */}
+                      <circle cx="100" cy="10" r="8" fill="#FFB703" />
+                    </svg>
+
+                    {/* Etichette degli orari */}
+                    <div
+                      className="d-flex justify-content-between w-100 mt-2"
+                      style={{ maxWidth: "280px" }}
+                    >
+                      <div className="text-center">
+                        <p className="m-0 ">Alba</p>
+                        <p className="m-0 fw-bold">{sunrise}</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="m-0 ">Tramonto</p>
+                        <p className="m-0 fw-bold">{sunset}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
