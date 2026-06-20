@@ -261,13 +261,19 @@ function Homepage() {
   };
 
   const sunriseSunset = (sunriseSec, sunsetSec, timezoneOffset) => {
+    if (sunriseSec == null || sunsetSec == null || timezoneOffset == null) {
+      return;
+    }
+
     const opzioni = { hour: "2-digit", minute: "2-digit", timeZone: "UTC" };
 
     const sunriseObj = new Date((sunriseSec + timezoneOffset) * 1000);
     const sunsetObj = new Date((sunsetSec + timezoneOffset) * 1000);
 
-    setSunrise(sunriseObj.toLocaleTimeString("it-IT", opzioni));
-    setSunset(sunsetObj.toLocaleTimeString("it-IT", opzioni));
+    if (!isNaN(sunriseObj.getTime()) && !isNaN(sunsetObj.getTime())) {
+      setSunrise(sunriseObj.toLocaleTimeString("it-IT", opzioni));
+      setSunset(sunsetObj.toLocaleTimeString("it-IT", opzioni));
+    }
   };
 
   return (
