@@ -377,7 +377,7 @@ function Homepage() {
 
                 {/* Meteo 3h x 3h barra orizzontale */}
 
-                <div className="container bg-opacity rounded-4 mb-4">
+                <div className="container bg-opacity rounded-4 mb-4 pt-2">
                   <div className="d-flex m-auto overflow-auto weatherFiveDays">
                     {weatherFiveDays ? (
                       weatherFiveDays.map((a, i) => {
@@ -431,8 +431,8 @@ function Homepage() {
                               src={getMeteoIcon(day.day.condition_code)}
                               alt="Icona meteo"
                               style={{
-                                width: "80px",
-                                height: "80px",
+                                width: "70px",
+                                height: "70px",
                                 objectFit: "contain",
                               }}
                             />
