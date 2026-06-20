@@ -192,7 +192,7 @@ function Homepage() {
       }
 
       setWeatherData(data);
-      sunriseSunset(data.sys.sunrise, data.sys.sunset);
+      sunriseSunset(data.sys.sunrise, data.sys.sunset, data.timezone);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -260,11 +260,11 @@ function Homepage() {
     minHeight: "100vh",
   };
 
-  const sunriseSunset = (sunriseSec, sunsetSec) => {
-    const opzioni = { hour: "2-digit", minute: "2-digit" };
+  const sunriseSunset = (sunriseSec, sunsetSec, timezoneOffset) => {
+    const opzioni = { hour: "2-digit", minute: "2-digit", timeZone: "UTC" };
 
-    const sunriseObj = new Date(sunriseSec * 1000);
-    const sunsetObj = new Date(sunsetSec * 1000);
+    const sunriseObj = new Date((sunriseSec + timezoneOffset) * 1000);
+    const sunsetObj = new Date((sunsetSec + timezoneOffset) * 1000);
 
     setSunrise(sunriseObj.toLocaleTimeString("it-IT", opzioni));
     setSunset(sunsetObj.toLocaleTimeString("it-IT", opzioni));
@@ -534,13 +534,11 @@ function Homepage() {
                   <p className="fw-bold mb-3">Ciclo Solare</p>
 
                   <div className="d-flex flex-column align-items-center text-light">
-                    {/* SVG dell'arco */}
                     <svg
                       viewBox="0 0 200 100"
                       width="100%"
                       style={{ maxWidth: "250px", overflow: "visible" }}
                     >
-                      {/* Linea dell'orizzonte */}
                       <line
                         x1="10"
                         y1="90"
@@ -550,7 +548,6 @@ function Homepage() {
                         strokeWidth="2"
                       />
 
-                      {/* Arco del sole */}
                       <path
                         d="M 20 90 A 80 80 0 0 1 180 90"
                         fill="none"
@@ -560,11 +557,9 @@ function Homepage() {
                         strokeDasharray="7 7"
                       />
 
-                      {/* Icona Sole (posizionata ipoteticamente al centro/mezzogiorno) */}
                       <circle cx="100" cy="10" r="8" fill="#FFB703" />
                     </svg>
 
-                    {/* Etichette degli orari */}
                     <div
                       className="d-flex justify-content-between w-100 mt-2"
                       style={{ maxWidth: "280px" }}
