@@ -125,9 +125,9 @@ function Homepage() {
       "https://images.unsplash.com/photo-1603288967520-f3e04381dc02?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xvdWR5JTIwbmlnaHR8ZW58MHx8MHx8fDA%3D",
 
     "04d":
-      "https://images.unsplash.com/photo-1594156596782-656c93e4d504?w=1200&auto=format&fit=crop",
+      "https://img.magnific.com/free-photo/dramatic-landscape-view-with-sun-rays-shining-through-dark-cloudy-sky_181624-45676.jpg?semt=ais_hybrid&w=740&q=80",
     "04n":
-      "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1603288967520-f3e04381dc02?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xvdWR5JTIwbmlnaHR8ZW58MHx8MHx8fDA%3D",
 
     "09d":
       "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=1200&auto=format&fit=crop",
