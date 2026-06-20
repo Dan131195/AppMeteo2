@@ -2,10 +2,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
-import locationIcon from "../assets/location--icon.png";
+import locationIcon from "../assets/icons/location.png";
 
 // WHEATHER ICON
-import WeatherAppIcon from "../assets/meteo-icona.png";
+import WeatherAppIcon from "../assets/icons/meteo-icona.png";
 import clearDay from "../assets/svg/clear-day.svg";
 import clearNight from "../assets/svg/clear-night.svg";
 import cloudy from "../assets/svg/cloudy.svg";
@@ -134,9 +134,10 @@ function Homepage() {
     "09n":
       "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=1200&auto=format&fit=crop",
 
-    "10d": "https://wallpapercave.com/wp/wp7098061.jpg",
+    "10d":
+      "https://t4.ftcdn.net/jpg/08/78/10/75/360_F_878107548_lSjbkU9U4E3nUWc09xVGVdhFc27Feb9L.jpg",
     "10n":
-      "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=1200&auto=format&fit=crop",
+      "https://img.magnific.com/premium-photo/stunning-photo-black-background-with-heavy-rain-falling-raindrops-hitting-ground-rainy-night-sky_900706-60677.jpg?semt=ais_hybrid&w=740&q=80",
 
     "11d":
       "https://media.istockphoto.com/id/1098124180/photo/lightning-strike-from-a-thunderstorm.jpg?s=612x612&w=0&k=20&c=cY9qHJWG1AVtcUVWbXFFfeBxb4C7y-SrgK4nC9jU9MA=",
@@ -369,17 +370,15 @@ function Homepage() {
                 <div className="bg-opacity rounded-4 mb-3 pt-2">
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="ps-4">
-                      <p className="fs-1 m-0">
-                        <img
-                          src={locationIcon}
-                          className="locationIcon m-0 p-0"
-                          alt="Location Icon"
-                        />
-                        {weatherData.name}{" "}
-                        <span className=" fs-6 opacity-75">
-                          ({weatherData.sys.country})
-                        </span>
-                      </p>
+                      <div className="">
+                        <p className="fs-1 m-0">
+                          <img src={locationIcon} alt="" width={40} />
+                          {weatherData.name}{" "}
+                          <span className=" fs-6 opacity-75">
+                            ({weatherData.sys.country})
+                          </span>
+                        </p>
+                      </div>
 
                       <p className="display-1 ps-3">
                         {Math.floor(weatherData.main.temp)}°
