@@ -266,7 +266,6 @@ function Homepage() {
       ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${backgroundUrl}')`
       : "none",
     backgroundSize: "cover",
-    backgroundAttachment: "fixed",
     backgroundPosition: "center",
     transition: "background-image 0.5s ease-in-out",
     minHeight: "100vh",
