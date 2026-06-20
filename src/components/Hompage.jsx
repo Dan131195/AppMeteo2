@@ -21,9 +21,14 @@ import thunderstorm from "../assets/svg/thunderstorm.svg";
 
 import locationNotFound from "../assets/img/location-not-found.png";
 
+import visibilityIcon from "../assets/icons/icons-visibility.png";
+import humidityIcon from "../assets/icons/icons-humidity.png";
+import temperatureIcon from "../assets/icons/icons-temperature.png";
+import windIcon from "../assets/icons/icons-wind.png";
+
 function Homepage() {
   const [searchInput, setSearchInput] = useState("");
-  const [city, setCity] = useState("Roma");
+  const [city, setCity] = useState("Firenze");
   const [weatherData, setWeatherData] = useState(null);
   const [weatherFiveDays, setWeatherFiveDays] = useState(null);
   const [weatherWeekDays, setWeatherWeekDays] = useState(null);
@@ -261,6 +266,7 @@ function Homepage() {
       ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${backgroundUrl}')`
       : "none",
     backgroundSize: "cover",
+    backgroundAttachment: "fixed",
     backgroundPosition: "center",
     transition: "background-image 0.5s ease-in-out",
     minHeight: "100vh",
@@ -515,43 +521,53 @@ function Homepage() {
 
                 {/* CARDS Informazioni aggiuntive */}
 
-                <div className="cardsContainer row row-cols-2 row-cols-lg-3">
-                  <div className=" ps-4 pe-2">
-                    <div className=" text-center rounded-4 py-2 bg-opacity ">
-                      <p className="m-0 fs-5 fw-bold">
+                <div className="cardsContainer row row-cols-2 row-cols-lg-3 g-2">
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100 pt-3">
+                      <div className="">
+                        <img src={windIcon} alt="" width={30} />
+                      </div>
+                      <p className="m-0 fs-6">
                         {Math.floor(weatherData.wind.speed)} Km/h
                       </p>
-                      <p className="detailsTitles m-0 opacity-75">VENTO</p>
+                      <p className="detailsTitles opacity-75">VENTO</p>
                     </div>
                   </div>
 
-                  <div className=" pe-4 ps-2">
-                    <div className=" text-center rounded-4 py-2 bg-opacity">
-                      <p className="m-0 fs-5 fw-bold m-0">
-                        {weatherData.main.humidity}%
-                      </p>
-                      <p className="detailsTitles m-0 opacity-75">UMIDITÀ</p>
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100 pt-3">
+                      <div>
+                        <img src={humidityIcon} alt="" width={30} />
+                      </div>
+                      <p className="m-0 fs-6 ">{weatherData.main.humidity}%</p>
+                      <p className="detailsTitles opacity-75">UMIDITÀ</p>
                     </div>
                   </div>
 
-                  <div className="py-3 ps-4 pe-2">
-                    <div className=" text-center rounded-4 py-2 bg-opacity">
-                      <p className="m-0 fs-5 fw-bold m-0">
-                        {weatherData.visibility} m
-                      </p>
-                      <p className="detailsTitles m-0 opacity-75">VISIBILITÀ</p>
+                  <div className="col">
+                    <div className=" text-center rounded-4  bg-opacity h-100  pt-3">
+                      <div>
+                        <img src={visibilityIcon} alt="" width={30} />
+                      </div>
+                      <p className="m-0 fs-6">{weatherData.visibility} m</p>
+                      <p className="detailsTitles opacity-75">VISIBILITÀ</p>
                     </div>
                   </div>
 
-                  <div className="py-3 pe-4 ps-2">
-                    <div className=" text-center rounded-4 py-2 bg-opacity">
-                      <p className="m-0 fs-5 fw-bold m-0">
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
+                      <div>
+                        <img src={temperatureIcon} alt="" width={30} />
+                      </div>
+                      <p className="m-0 fs-6">
                         {weatherData.main.pressure} hpA
                       </p>
-                      <p className="detailsTitles m-0 opacity-75">PERCEPITA</p>
+                      <p className="detailsTitles opacity-75">PRESSIONE</p>
                     </div>
                   </div>
                 </div>
+
+                {/* Ciclo solare */}
                 <div className="bg-opacity rounded-4 p-3 mt-3">
                   <p className="fw-bold mb-3">Ciclo Solare</p>
 
