@@ -441,7 +441,7 @@ function Homepage() {
                         return (
                           <div
                             key={i}
-                            className="me-3 d-flex align-items-center justify-content-between"
+                            className=" d-flex align-items-center justify-content-between"
                           >
                             <p className="m-0">{`${giorno} ${mese} `}</p>
 
