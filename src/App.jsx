@@ -11,7 +11,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Hompage />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>

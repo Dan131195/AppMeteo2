@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import locationIcon from "../assets/location--icon.png";
-import skyCloudsDay from "../assets/videos/sky_clouds_day.mp4";
+// import skyCloudsDay from "../assets/videos/sky_clouds_day.mp4";
 
 // WHEATHER ICON
 import WeatherAppIcon from "../assets/meteo-icona.png";
@@ -25,9 +25,9 @@ function Homepage() {
   const [weatherData, setWeatherData] = useState(null);
   const [weatherFiveDays, setWeatherFiveDays] = useState(null);
   const [weatherWeekDays, setWeatherWeekDays] = useState(null);
+  const [backgroundUrl, setBackgroundUrl] = useState("");
 
-  const isNight = new Date().getHours() >= 20 || new Date().getHours() < 6;
-  console.log(isNight);
+  const [error, setError] = useState(null);
 
   const arr = [];
 
@@ -58,6 +58,54 @@ function Homepage() {
     "50n": mist,
   };
 
+  // WEATHER BACKGROUNDS
+  const backgroundMap = {
+    "01d":
+      "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1200&auto=format&fit=crop",
+    "01n":
+      "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1920&auto=format&fit=crop",
+
+    "02d":
+      "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1200&auto=format&fit=crop",
+    "02n":
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop",
+
+    "03d":
+      "https://images.unsplash.com/photo-1594156596782-656c93e4d504?w=1200&auto=format&fit=crop",
+    "03n":
+      "https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?w=1200&auto=format&fit=crop",
+
+    "04d":
+      "https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?q=80&w=1920&auto=format&fit=crop",
+    "04n":
+      "https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?q=80&w=1920&auto=format&fit=crop",
+
+    "09d":
+      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1920&auto=format&fit=crop",
+    "09n":
+      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1920&auto=format&fit=crop",
+
+    "10d":
+      "https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1920&auto=format&fit=crop",
+    "10n":
+      "https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1920&auto=format&fit=crop",
+
+    "11d":
+      "https://images.unsplash.com/photo-1605727216801-e27ce1d0ce49?q=80&w=1920&auto=format&fit=crop",
+    "11n":
+      "https://images.unsplash.com/photo-1605727216801-e27ce1d0ce49?q=80&w=1920&auto=format&fit=crop",
+
+    "13d":
+      "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1200&auto=format&fit=crop",
+    "13n":
+      "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1200&auto=format&fit=crop",
+
+    "50d":
+      "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=1920&auto=format&fit=crop",
+    "50n":
+      "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=1920&auto=format&fit=crop",
+  };
+
   const getCustomIcon = (code) => {
     return iconMap[code];
   };
@@ -80,10 +128,31 @@ function Homepage() {
 
   const fetchWeatherData = async (cityName) => {
     try {
+      setError(null);
+
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
       const data = await response.json();
+      console.log(data);
+
+      if (data.cod === "404" || response.status === 404) {
+        setError("Città non trovata. Riprova con un altro nome.");
+        setWeatherData(null);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Errore nel recupero dei dati");
+      }
+
+      if (data.weather && data.weather[0]) {
+        const weatherIconCode = data.weather[0].icon;
+
+        const newBg = backgroundMap[weatherIconCode];
+        setBackgroundUrl(newBg);
+      }
+
       setWeatherData(data);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
@@ -107,63 +176,42 @@ function Homepage() {
 
   const fetchWeekDaysWeatherData = async (cityName) => {
     try {
-      // Step 1: city name → coordinate (geocoding gratuito)
-      const cityName2 = cityName.split(",")[0];
-      const geoRes = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${cityName2}&count=1&language=it`,
+      const response = await fetch(
+        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it`,
       );
-      const geoData = await geoRes.json();
+      const data = await response.json();
 
-      if (!geoData.results || geoData.results.length === 0) {
-        console.error("Città non trovata:", cityName);
-        return;
-      }
-
-      const { latitude, longitude } = geoData.results[0];
-
-      // Step 2: forecast 7 giorni
-      const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max&timezone=auto&forecast_days=7`,
-      );
-      const data = await res.json();
-      console.log(data);
-      setWeatherWeekDays(data);
+      setWeatherWeekDays(data.forecast.forecastday);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
   };
 
-  /*  const fetchWeekDaysWeatherData = async (cityName) => {
-    try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${key2}&q=${cityName}&days=6&lang=it` 
+  // Sfondo dinamico autoplay forzato
 
-        `https://api.openweathermap.org/data/2.5/forecast/daily?q=${cityName}&cnt={6}&appid=${key}`,
-      );
+  // const videoRef = useRef(null);
 
-      const data = await response.json();
-      console.log(data);
-      setWeatherWeekDays(data);
-    } catch (error) {
-      console.error("Errore nel recupero dei dati meteo:", error);
-    }
-  }; */
+  // useEffect(() => {
+  //   if (videoRef.current) {
+  //     videoRef.current.playbackRate = 0.5;
+  //     videoRef.current.play().catch((err) => {
+  //       console.error("Autoplay bloccato:", err);
+  //     });
+  //   }
+  // }, []);
 
-  // Sfondo dinamico autoplay forzato (PER METTERE LIVE WALLPAPER)
-
-  /* const videoRef = useRef(null); */
-
-  /* useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5;
-      videoRef.current.play().catch((err) => {
-        console.error("Autoplay bloccato:", err);
-      });
-    }
-  }, []); */
+  const containerStyle = {
+    backgroundImage: backgroundUrl
+      ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${backgroundUrl}')`
+      : "none",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    transition: "background-image 0.5s ease-in-out",
+    minHeight: "100vh", // o l'altezza che serve alla tua app
+  };
 
   return (
-    <div id="weather-app">
+    <div style={containerStyle} id="weather-app">
       {/* <video
         id="bg-video"
         className="w-100 opacity-50"
@@ -211,7 +259,7 @@ function Homepage() {
                   <input
                     className="form-control bg-transparent text-light"
                     type="search"
-                    placeholder="Es. Londra,gb"
+                    placeholder="Es. Londra"
                     aria-label="Search"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
@@ -224,7 +272,16 @@ function Homepage() {
             </div>
           </nav>
 
-          {weatherData ? (
+          {error && (
+            <div
+              className="error-banner"
+              style={{ color: "red", textAlign: "center", margin: "20px" }}
+            >
+              <p>{error}</p>
+            </div>
+          )}
+
+          {weatherData && !error && (
             <main className="text-center">
               <div className="container p-3 ">
                 <div className="bg-opacity rounded-4 mb-3">
@@ -296,7 +353,7 @@ function Homepage() {
 
                 {/*Card meteo settimanale (6 giorni)  */}
 
-                {/* <div className="container bg-opacity rounded-4 mb-4 ">
+                <div className="container bg-opacity rounded-4 mb-4 ">
                   <div className=" weatherWeekDays">
                     {weatherWeekDays ? (
                       weatherWeekDays.map((day, i) => {
@@ -335,7 +392,7 @@ function Homepage() {
                       <p>Caricamento previsioni settimanali...</p>
                     )}
                   </div>
-                </div> */}
+                </div>
 
                 {/* CARDS Informazioni aggiuntive */}
 
@@ -378,8 +435,6 @@ function Homepage() {
                 </div>
               </div>
             </main>
-          ) : (
-            <p>Cerca una città per vedere il meteo</p>
           )}
         </div>
       </div>
