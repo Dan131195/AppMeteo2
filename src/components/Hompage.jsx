@@ -23,16 +23,19 @@ import locationNotFound from "../assets/img/location-not-found.png";
 
 function Homepage() {
   const [searchInput, setSearchInput] = useState("");
-  const [city, setCity] = useState("Rome,it");
+  const [city, setCity] = useState("Roma");
   const [weatherData, setWeatherData] = useState(null);
   const [weatherFiveDays, setWeatherFiveDays] = useState(null);
   const [weatherWeekDays, setWeatherWeekDays] = useState(null);
   const [backgroundUrl, setBackgroundUrl] = useState("");
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const [sunrise, setSunrise] = useState("--:--");
   const [sunset, setSunset] = useState("--:--");
+
+  const [tempMin, setTempMin] = useState("");
+  const [tempMax, setTempMax] = useState("");
 
   const arr = [];
 
@@ -100,49 +103,46 @@ function Homepage() {
   // WEATHER BACKGROUNDS
   const backgroundMap = {
     "01d":
-      "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1200&auto=format&fit=crop",
+      "https://i.pinimg.com/736x/e1/3a/4d/e13a4d737425141353603f7a3edb73cd.jpg",
     "01n":
-      "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1920&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1200&auto=format&fit=crop",
 
     "02d":
-      "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1200&auto=format&fit=crop",
+      "https://media.baamboozle.com/uploads/images/150883/1657429562_160152.jpeg",
     "02n":
-      "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop",
+      "https://t4.ftcdn.net/jpg/02/98/13/93/360_F_298139354_B8MchbDhUhOuAfcewRxZ9AUOKV9vsWAt.jpg",
 
     "03d":
-      "https://images.unsplash.com/photo-1594156596782-656c93e4d504?w=1200&auto=format&fit=crop",
+      "https://img.magnific.com/free-photo/dramatic-landscape-view-with-sun-rays-shining-through-dark-cloudy-sky_181624-45676.jpg?semt=ais_hybrid&w=740&q=80",
     "03n":
-      "https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?w=1200&auto=format&fit=crop",
-
+      "https://images.unsplash.com/photo-1603288967520-f3e04381dc02?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xvdWR5JTIwbmlnaHR8ZW58MHx8MHx8fDA%3D",
     "04d":
-      "https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?q=80&w=1920&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1594156596782-656c93e4d504?w=1200&auto=format&fit=crop",
     "04n":
-      "https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?q=80&w=1920&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?w=1200&auto=format&fit=crop",
 
     "09d":
-      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1920&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=1200&auto=format&fit=crop",
     "09n":
-      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=1920&auto=format&fit=crop",
-
-    "10d":
-      "https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1920&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=1200&auto=format&fit=crop",
+    "10d": "https://wallpapercave.com/wp/wp7098061.jpg",
     "10n":
-      "https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1920&auto=format&fit=crop",
-
+      "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=1200&auto=format&fit=crop",
     "11d":
-      "https://images.unsplash.com/photo-1605727216801-e27ce1d0ce49?q=80&w=1920&auto=format&fit=crop",
+      "https://media.istockphoto.com/id/1098124180/photo/lightning-strike-from-a-thunderstorm.jpg?s=612x612&w=0&k=20&c=cY9qHJWG1AVtcUVWbXFFfeBxb4C7y-SrgK4nC9jU9MA=",
     "11n":
-      "https://images.unsplash.com/photo-1605727216801-e27ce1d0ce49?q=80&w=1920&auto=format&fit=crop",
-
+      "https://cloudfront-us-east-1.images.arcpublishing.com/gray/LARRIZM7UFJOZBL27NYSWT73JI.jpg",
     "13d":
       "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1200&auto=format&fit=crop",
     "13n":
-      "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1200&auto=format&fit=crop",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1805740/ss_041773b37dc1db16e8776bebfcc300ae0e16a2dd.1920x1080.jpg?t=1636470143",
 
     "50d":
-      "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=1920&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?w=1200&auto=format&fit=crop",
     "50n":
-      "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=1920&auto=format&fit=crop",
+      "https://w0.peakpx.com/wallpaper/428/576/HD-wallpaper-foggy-night-foggy-night-fog-woman-street-lights-weather-people-mood-alone.jpg",
+    default:
+      "https://img.magnific.com/free-vector/beautiful-dreamy-night-cloudy-sky-background_1017-62567.jpg",
   };
 
   const getCustomIcon = (code) => {
@@ -153,7 +153,7 @@ function Homepage() {
     if (city) {
       fetchWeekDaysWeatherData(city);
       fetchWeatherData(city);
-      fetchFiveDaysWeatherData(city);
+      fetchThreeHoursWeaterData(city);
     }
   }, [city]);
 
@@ -175,8 +175,10 @@ function Homepage() {
       const data = await response.json();
 
       if (data.cod === "404" || response.status === 404) {
-        setError("Città non trovata. Riprova con un altro nome.");
+        setError(true);
         setWeatherData(null);
+        const newBg = backgroundMap["default"];
+        setBackgroundUrl(newBg);
         return;
       }
 
@@ -190,7 +192,7 @@ function Homepage() {
         const newBg = backgroundMap[weatherIconCode];
         setBackgroundUrl(newBg);
       }
-
+      console.log(data);
       setWeatherData(data);
       sunriseSunset(data.sys.sunrise, data.sys.sunset, data.timezone);
     } catch (error) {
@@ -198,13 +200,13 @@ function Homepage() {
     }
   };
 
-  const fetchFiveDaysWeatherData = async (cityName) => {
+  const fetchThreeHoursWeaterData = async (cityName) => {
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
       const data = await response.json();
-      data.list.slice(0, 10).forEach((item) => {
+      data.list.slice(0, 12).forEach((item) => {
         arr.push(item);
       });
       setWeatherFiveDays(arr);
@@ -228,14 +230,18 @@ function Homepage() {
 
       const { latitude, longitude } = geoData.results[0];
 
-      const weatherResponse = await fetch(
+      const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`,
       );
-      const weatherData = await weatherResponse.json();
+      const weatherData = await response.json();
+      console.log(weatherData);
+
+      setTempMin(Math.round(weatherData.daily.temperature_2m_min[0]));
+      setTempMax(Math.round(weatherData.daily.temperature_2m_max[0]));
 
       const forecastday = weatherData.daily.time.map((dataGiorno, index) => {
         return {
-          date: dataGiorno, // es. "2026-06-20"
+          date: dataGiorno,
           day: {
             maxtemp_c: weatherData.daily.temperature_2m_max[index],
             mintemp_c: weatherData.daily.temperature_2m_min[index],
@@ -277,7 +283,7 @@ function Homepage() {
   };
 
   return (
-    <div style={containerStyle} id="weather-app">
+    <div style={containerStyle} id="weather-app p-0">
       <div className="content">
         <div>
           <nav className="navbar navbar-expand-lg container">
@@ -310,7 +316,7 @@ function Homepage() {
                 id="navbarSupportedContent"
               >
                 <form
-                  className=" rounded-4 w-100 d-flex justify-content-center align-items-center  w-100 py-2"
+                  className="bg-opacity rounded-4 w-100 d-flex justify-content-center align-items-center  w-100 py-2"
                   role="search"
                   onSubmit={handleSubmit}
                 >
@@ -336,8 +342,11 @@ function Homepage() {
               className="error-banner"
               style={{ color: "red", textAlign: "center", margin: "20px" }}
             >
-              <img src={locationNotFound} alt="" width={200} />
-              <p>{error}</p>
+              <p className=" display-5 text-center fw-bold"> Ops!</p>
+              <p className="text-center fw-bold fs-4">
+                Qualcosa è andato storto
+              </p>
+              <img src={locationNotFound} alt="" width={300} />
             </div>
           )}
 
@@ -346,7 +355,7 @@ function Homepage() {
               <div className="container p-3 ">
                 <div className="bg-opacity rounded-4 mb-3">
                   <div className="d-flex justify-content-between align-items-center">
-                    <div className="-2">
+                    <div className="ps-4">
                       <p className="fs-1 m-0">
                         <img
                           src={locationIcon}
@@ -363,12 +372,11 @@ function Homepage() {
                         {Math.floor(weatherData.main.temp)}°
                       </p>
 
-                      <p className="fs-5 ps-3 pb-2 capitalize-first">
+                      <p className="fs-5 ps-3 mb-0 capitalize-first">
                         {weatherData.weather[0].description}
-                        <span className="ps-2">
-                          {Math.floor(weatherData.main.temp_min)}° /{" "}
-                          {Math.floor(weatherData.main.temp_max)}°
-                        </span>
+                      </p>
+                      <p className="">
+                        {tempMin}° / {tempMax}°
                       </p>
                     </div>
 
@@ -383,8 +391,8 @@ function Homepage() {
 
                 {/* Meteo 3h x 3h barra orizzontale */}
 
-                <div className="container bg-opacity rounded-4 mb-4 pt-2">
-                  <div className="d-flex m-auto overflow-auto weatherFiveDays">
+                <div className="container bg-opacity rounded-4 mb-4 pt-2 text-center">
+                  <div className="d-flex m-auto overflow-auto weatherFiveDays px-2">
                     {weatherFiveDays ? (
                       weatherFiveDays.map((a, i) => {
                         // eslint-disable-next-line no-unused-vars
@@ -413,10 +421,10 @@ function Homepage() {
 
                 {/*Card meteo settimanale (6 giorni)  */}
 
-                <div className="container bg-opacity rounded-4 mb-4 ">
-                  <div className=" weatherWeekDays">
+                <div className="container bg-opacity rounded-4 mb-4 py-2">
+                  <div className=" weatherWeekDays mb-2">
                     {weatherWeekDays ? (
-                      weatherWeekDays.map((day, i) => {
+                      weatherWeekDays.slice(1).map((day, i) => {
                         const d = new Date(day.date);
 
                         const giorno = d.toLocaleDateString("it-IT", {
@@ -453,6 +461,15 @@ function Homepage() {
                     ) : (
                       <p>Caricamento previsioni settimanali...</p>
                     )}
+                  </div>
+                  <div className="text-center mb-2">
+                    <a
+                      href={`https://www.ilmeteo.it/meteo/${city}`}
+                      className="bg-opacity text-decoration-none text-light rounded-4 py-2 px-4"
+                      id="LinkIlMeteo"
+                    >
+                      Visualizza dettagli
+                    </a>
                   </div>
                 </div>
 
