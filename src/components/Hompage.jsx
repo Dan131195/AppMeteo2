@@ -25,6 +25,9 @@ import visibilityIcon from "../assets/icons/icons-visibility.png";
 import humidityIcon from "../assets/icons/icons-humidity.png";
 import temperatureIcon from "../assets/icons/icons-temperature.png";
 import windIcon from "../assets/icons/icons-wind.png";
+import pressureIcon from "../assets/icons/icons-atmospheric-pressure.png";
+
+import cloudyIcon from "../assets/icons/icons-cloudy.png";
 
 function Homepage() {
   const [searchInput, setSearchInput] = useState("");
@@ -414,8 +417,11 @@ function Homepage() {
                             key={i}
                             className="mx-3 text-center d-flex flex-column justify-content-between "
                           >
-                            <p className="m-0">{`${date[2]}/${date[1]}`}</p>
-                            <p className="">{time}</p>
+                            <p className="m-0">{time}</p>
+                            <p
+                              style={{ fontSize: "0.7em" }}
+                            >{`${date[2]}/${date[1]}`}</p>
+
                             <div className="mb-1">
                               {" "}
                               <img
@@ -566,12 +572,34 @@ function Homepage() {
                   <div className="col">
                     <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
                       <div>
-                        <img src={temperatureIcon} alt="" width={30} />
+                        <img src={pressureIcon} alt="" width={30} />
                       </div>
                       <p className="m-0 fs-6">
                         {weatherData.main.pressure} hpA
                       </p>
                       <p className="detailsTitles opacity-75">PRESSIONE</p>
+                    </div>
+                  </div>
+
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
+                      <div>
+                        <img src={cloudyIcon} alt="" width={30} />
+                      </div>
+                      <p className="m-0 fs-6">{weatherData.clouds.all} %</p>
+                      <p className="detailsTitles opacity-75">NUVOLOSITÀ</p>
+                    </div>
+                  </div>
+
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
+                      <div>
+                        <img src={temperatureIcon} alt="" width={30} />
+                      </div>
+                      <p className="m-0 fs-6">
+                        {Math.floor(weatherData.main.feels_like)}°
+                      </p>
+                      <p className="detailsTitles opacity-75">PERCEPITA</p>
                     </div>
                   </div>
                 </div>
