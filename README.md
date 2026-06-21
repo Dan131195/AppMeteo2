@@ -9,7 +9,7 @@ L'applicazione adotta un approccio **Mobile-First**, garantendo un'interfaccia n
 ## 📸 Anteprima Interfaccia (Mobile View)
 
 <p align="center">
-  <img src="/src/assets/img/Screenshot-WeatherApp.png" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
+  <img src="/src/assets/img/Screenshot-WeatherApp.png" width="320"  />
   <img src="https://images.unsplash.com/photo-1590055531615-f16d36fed8f8?w=350&auto=format&fit=crop&q=80" alt="WeatherApp Solar Cycle Preview" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
 </p>
 
