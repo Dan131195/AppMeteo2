@@ -298,26 +298,22 @@ function Homepage() {
   };
 
   useEffect(() => {
-    // Ci assicuriamo che i dati meteo siano caricati
     if (!weatherData || !weatherData.sys) return;
 
     const updateSunPosition = () => {
-      // Otteniamo il momento attuale in secondi (Timestamp assoluto)
       const nowSec = Math.floor(Date.now() / 1000);
 
-      // Prendiamo i secondi esatti dell'alba e tramonto forniti dall'API
       const sunriseSec = weatherData.sys.sunrise;
       const sunsetSec = weatherData.sys.sunset;
 
       let progress = 0;
 
-      // Calcoliamo la percentuale esatta basandoci sul tempo assoluto
+      // percentuale esatta basandoci sul tempo assoluto
       if (nowSec <= sunriseSec) {
-        progress = 0; // Prima dell'alba (fermo all'inizio)
+        progress = 0;
       } else if (nowSec >= sunsetSec) {
-        progress = 1; // Dopo il tramonto (fermo alla fine)
+        progress = 1;
       } else {
-        // Percentuale di completamento della giornata
         progress = (nowSec - sunriseSec) / (sunsetSec - sunriseSec);
       }
 
@@ -326,14 +322,11 @@ function Homepage() {
       const cx = 100;
       const cy = 90;
 
-      // Calcoliamo l'angolo in radianti
       const angle = Math.PI * (1 - progress);
 
-      // Posizioni X e Y
       const x = cx + radius * Math.cos(angle);
       const y = cy - radius * Math.sin(angle);
 
-      // Ritardo per l'animazione d'ingresso
       setTimeout(() => {
         setSunPosition({ x, y });
       }, 500);
@@ -341,11 +334,8 @@ function Homepage() {
 
     updateSunPosition();
 
-    // Aggiorna la posizione ogni minuto
     const interval = setInterval(updateSunPosition, 60000);
     return () => clearInterval(interval);
-
-    // L'effetto ora reagisce al cambiamento di weatherData
   }, [weatherData]);
 
   return (
