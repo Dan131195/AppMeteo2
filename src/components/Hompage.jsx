@@ -662,14 +662,14 @@ function Homepage() {
           )}
 
           <footer>
-            <div className="d-flex justify-content-between align-items-center p-3">
+            <div className="d-flex justify-content-between align-items-center p-3 ">
               <div>
                 <img
                   src={WeatherAppIcon}
                   alt="Weather app Icon"
                   id="footerIcon"
                 />
-                <span className="ps-2">
+                <span className="ps-2 footerText">
                   © 2026 Weather App - Daniele Franceschini
                 </span>
               </div>
