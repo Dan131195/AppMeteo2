@@ -327,9 +327,7 @@ function Homepage() {
       const x = cx + radius * Math.cos(angle);
       const y = cy - radius * Math.sin(angle);
 
-      setTimeout(() => {
-        setSunPosition({ x, y });
-      }, 500);
+      setSunPosition({ x, y });
     };
 
     updateSunPosition();
