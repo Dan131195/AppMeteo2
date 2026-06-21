@@ -99,12 +99,32 @@ form {
 
 #LinkIlMeteo {
   margin: 0 auto;
+  display: inline-block;
 }
 
 #LinkIlMeteo:hover {
   border: 1px solid #ffffff;
+  transform: scale(1.02);
 }
 
 .detailsTitles {
   font-size: 0.8em;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #000000a1;
+}
+
+#footerIcon {
+  width: 30px;
+}
+
+.footerLink {
+  display: inline-block;
+}
+
+.footerLink:hover {
+  transform: scale(1.1);
 }

@@ -660,6 +660,38 @@ function Homepage() {
               </div>
             </main>
           )}
+
+          <footer>
+            <div className="d-flex justify-content-between align-items-center p-3">
+              <div>
+                <img
+                  src={WeatherAppIcon}
+                  alt="Weather app Icon"
+                  id="footerIcon"
+                />
+                <span className="ps-2">
+                  © 2026 Weather App - Daniele Franceschini
+                </span>
+              </div>
+
+              <div>
+                <a
+                  href="https://github.com/Dan131195/AppMeteo2"
+                  target="blank"
+                  className="footerLink"
+                >
+                  <i className="bi bi-github m-2 fs-1"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/13-daniele-franceschini/"
+                  target="blank"
+                  className="footerLink"
+                >
+                  <i className="bi bi-linkedin m-2 fs-1"></i>
+                </a>
+              </div>
+            </div>
+          </footer>
         </div>
       </div>
     </div>
