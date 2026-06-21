@@ -8,7 +8,7 @@ L'applicazione adotta un approccio **Mobile-First**, garantendo un'interfaccia n
 
 ## 📸 Anteprima Interfaccia (Mobile View)
 
-<table align="center">
+<table>
   <tr>
     <td style="margin: 10px; 
      padding: 0px">
