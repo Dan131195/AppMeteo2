@@ -337,7 +337,7 @@ function Homepage() {
   }, [weatherData]);
 
   return (
-    <div style={containerStyle} id="weather-app p-0">
+    <div style={containerStyle} id="weather-app">
       <div className="content">
         <div>
           <nav className="navbar navbar-expand-lg container">
@@ -612,7 +612,9 @@ function Homepage() {
 
                 {/* Ciclo solare */}
                 <div className="bg-opacity rounded-4 p-3 mt-3 animate-fade-up">
-                  <p className="fw-bold mb-3">Ciclo Solare</p>
+                  <p className="fw-bold mb-3" id="solarCycleTitle">
+                    CICLO SOLARE
+                  </p>
 
                   <div className="d-flex flex-column align-items-center text-light">
                     <svg
