@@ -367,7 +367,7 @@ function Homepage() {
           {weatherData && !error && (
             <main className="text-center">
               <div className="container p-3 ">
-                <div className="bg-opacity rounded-4 mb-3 pt-2">
+                <div className="bg-opacity rounded-4 mb-3 pt-2 animate-fade-up">
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="ps-4">
                       <div className="">
@@ -403,7 +403,7 @@ function Homepage() {
 
                 {/* Meteo 3h x 3h barra orizzontale */}
 
-                <div className="container bg-opacity rounded-4 mb-4 pt-2 text-center">
+                <div className="container bg-opacity rounded-4 mb-4 pt-2 text-center animate-fade-up">
                   <div className="d-flex m-auto overflow-auto weatherTrheeHours px-2">
                     {weatherTrheeHours ? (
                       weatherTrheeHours.map((a, i) => {
@@ -440,8 +440,8 @@ function Homepage() {
 
                 {/*Card meteo settimanale (6 giorni)  */}
 
-                <div className="container bg-opacity rounded-4 mb-4 py-2">
-                  <div className=" weatherWeekDays mb-2">
+                <div className="container bg-opacity rounded-4 mb-4 py-2 animate-fade-up">
+                  <div className=" weatherWeekDays mb-2 p-2">
                     {weatherWeekDays ? (
                       weatherWeekDays.slice(1).map((day, i) => {
                         const d = new Date(day.date);
@@ -500,51 +500,10 @@ function Homepage() {
                   </div>
                 </div>
 
-                {/* <div className="container bg-opacity rounded-4 mb-4 ">
-                  <div className=" weatherWeekDays">
-                    {weatherWeekDays ? (
-                      weatherWeekDays.map((day, i) => {
-                        const d = new Date(day.date);
-
-                        const giorno = d.toLocaleDateString("it-IT", {
-                          day: "numeric",
-                        });
-                        const mese = d.toLocaleDateString("it-IT", {
-                          month: "short",
-                        });
-                        const settimana = d.toLocaleDateString("it-IT", {
-                          weekday: "short",
-                        });
-
-                        return (
-                          <div
-                            key={i}
-                            className="me-3 d-flex align-items-center justify-content-between"
-                          >
-                            <p className="m-0">
-                              {`${giorno} ${mese} ${
-                                settimana.charAt(0).toUpperCase() +
-                                settimana.slice(1)
-                              }`}
-                            </p>
-                            <img src={day.day.condition.icon} alt="" />
-                            <p className="m-0">
-                              {Math.round(day.day.mintemp_c)}° /{" "}
-                              {Math.round(day.day.maxtemp_c)}°
-                            </p>
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <p>Caricamento previsioni settimanali...</p>
-                    )}
-                  </div>
-                </div> */}
-
                 {/* CARDS Informazioni aggiuntive */}
 
                 <div className="cardsContainer row row-cols-2 row-cols-lg-3 g-2">
-                  <div className="col">
+                  <div className="col animate-fade-up">
                     <div className=" text-center rounded-4 bg-opacity h-100 pt-3">
                       <div className="">
                         <img src={windIcon} alt="" width={30} />
@@ -556,7 +515,7 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col">
+                  <div className="col animate-fade-up">
                     <div className=" text-center rounded-4 bg-opacity h-100 pt-3">
                       <div>
                         <img src={humidityIcon} alt="" width={30} />
@@ -566,7 +525,7 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col">
+                  <div className="col animate-fade-up">
                     <div className=" text-center rounded-4  bg-opacity h-100  pt-3">
                       <div>
                         <img src={visibilityIcon} alt="" width={30} />
@@ -576,7 +535,7 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col">
+                  <div className="col animate-fade-up">
                     <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
                       <div>
                         <img src={pressureIcon} alt="" width={30} />
@@ -588,7 +547,7 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col">
+                  <div className="col animate-fade-up">
                     <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
                       <div>
                         <img src={cloudyIcon} alt="" width={30} />
@@ -598,7 +557,7 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col">
+                  <div className="col animate-fade-up">
                     <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
                       <div>
                         <img src={temperatureIcon} alt="" width={30} />
@@ -612,7 +571,7 @@ function Homepage() {
                 </div>
 
                 {/* Ciclo solare */}
-                <div className="bg-opacity rounded-4 p-3 mt-3">
+                <div className="bg-opacity rounded-4 p-3 mt-3 animate-fade-up">
                   <p className="fw-bold mb-3">Ciclo Solare</p>
 
                   <div className="d-flex flex-column align-items-center text-light">
