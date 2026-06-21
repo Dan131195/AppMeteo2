@@ -6,7 +6,7 @@
   font-family:
     "Segoe UI",
     "Roboto" sans-serif;
-  font-size: 1em;
+  font-size: 12px;
 }
 
 #weatherApp > div:first-of-type {
@@ -99,4 +99,8 @@ form {
 
 #LinkIlMeteo {
   margin: 0 auto;
+}
+
+.detailsTitles {
+  font-size: 0.8em;
 }
