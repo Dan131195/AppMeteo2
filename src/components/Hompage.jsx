@@ -543,20 +543,20 @@ function Homepage() {
                 {/* CARDS Informazioni aggiuntive */}
 
                 <div className="cardsContainer row row-cols-2 row-cols-lg-3 g-2">
-                  <div className="col animate-fade-up">
-                    <div className=" text-center rounded-4 bg-opacity h-100 pt-3">
+                  <div className="col ">
+                    <div className=" text-center rounded-4 bg-opacity h-100 pt-3 animate-fade-up">
                       <div className="">
                         <img src={windIcon} alt="" width={30} />
                       </div>
                       <p className="m-0 fs-6">
                         {Math.floor(weatherData.wind.speed)} Km/h
                       </p>
-                      <p className="detailsTitles opacity-75">VENTO</p>
+                      <p className="detailsTitles opacity-75 ">VENTO</p>
                     </div>
                   </div>
 
-                  <div className="col animate-fade-up">
-                    <div className=" text-center rounded-4 bg-opacity h-100 pt-3">
+                  <div className="col ">
+                    <div className=" text-center rounded-4 bg-opacity h-100 pt-3 animate-fade-up">
                       <div>
                         <img src={humidityIcon} alt="" width={30} />
                       </div>
@@ -565,8 +565,8 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col animate-fade-up">
-                    <div className=" text-center rounded-4  bg-opacity h-100  pt-3">
+                  <div className="col">
+                    <div className=" text-center rounded-4  bg-opacity h-100  pt-3 animate-fade-up">
                       <div>
                         <img src={visibilityIcon} alt="" width={30} />
                       </div>
@@ -575,8 +575,8 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col animate-fade-up">
-                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3 animate-fade-up">
                       <div>
                         <img src={pressureIcon} alt="" width={30} />
                       </div>
@@ -587,8 +587,8 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col animate-fade-up">
-                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3 animate-fade-up">
                       <div>
                         <img src={cloudyIcon} alt="" width={30} />
                       </div>
@@ -597,8 +597,8 @@ function Homepage() {
                     </div>
                   </div>
 
-                  <div className="col animate-fade-up">
-                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3">
+                  <div className="col">
+                    <div className=" text-center rounded-4 bg-opacity h-100  pt-3 animate-fade-up">
                       <div>
                         <img src={temperatureIcon} alt="" width={30} />
                       </div>
