@@ -11,13 +11,13 @@ L'applicazione adotta un approccio **Mobile-First**, garantendo un'interfaccia n
 <table align="center">
   <tr>
     <td style="margin: 10px; border-radius: 20px;">
-      <img src="/src/assets/img/Screenshot-WeatherApp.png" alt="WeatherApp Preview 1" width="320"  />
+      <img src="/src/assets/img/Screenshot-WeatherApp.png" alt="WeatherApp Preview 1" width="250"  />
     </td>
     <td style="margin: 10px; border-radius: 20px;">
-      <img src="/src/assets/img/Screenshot-WeatherApp-2.png" alt="WeatherApp Preview 2" width="320"  />
+      <img src="/src/assets/img/Screenshot-WeatherApp-2.png" alt="WeatherApp Preview 2" width="250"  />
     </td>
     <td style="margin: 10px; border-radius: 20px;">
-      <img src="/src/assets/img/Screenshot-WeatherApp-3.png" alt="WeatherApp Preview 3" width="320"  />
+      <img src="/src/assets/img/Screenshot-WeatherApp-3.png" alt="WeatherApp Preview 3" width="250"  />
     </td>
   </tr>
 </table>
