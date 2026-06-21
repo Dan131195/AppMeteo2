@@ -9,17 +9,14 @@ L'applicazione adotta un approccio **Mobile-First**, garantendo un'interfaccia n
 ## 📸 Anteprima Interfaccia (Mobile View)
 
 <table>
-  <tr>
-    <td style="margin: 10px; 
-     padding: 0px">
+  <tr style="border=0; cellpadding=0; cellspacing=0; align=center; style=border-collapse: collapse; border: none;">
+    <td style="margin: 10px; border: none;">
       <img src="/src/assets/img/Screenshot-WeatherApp.png" alt="WeatherApp Preview 1" width="250"  />
     </td>
-    <td style="margin: 10px; 
-    ">
+    <td style="margin: 10px; border: none;">
       <img src="/src/assets/img/Screenshot-WeatherApp-2.png" alt="WeatherApp Preview 2" width="250"  />
     </td>
-    <td style="margin: 10px; 
-    ">
+    <td style="margin: 10px; border: none;">
       <img src="/src/assets/img/Screenshot-WeatherApp-3.png" alt="WeatherApp Preview 3" width="250"  />
     </td>
   </tr>
