@@ -101,6 +101,10 @@ form {
   margin: 0 auto;
 }
 
+#LinkIlMeteo:hover {
+  border: 1px solid #ffffff;
+}
+
 .detailsTitles {
   font-size: 0.8em;
 }

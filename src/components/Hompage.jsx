@@ -493,6 +493,7 @@ function Homepage() {
                       href={`https://www.ilmeteo.it/meteo/${city}`}
                       className="bg-opacity text-decoration-none text-light rounded-4 py-2 px-4"
                       id="LinkIlMeteo"
+                      target="blank"
                     >
                       Visualizza dettagli
                     </a>
