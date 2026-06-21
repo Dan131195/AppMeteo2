@@ -298,40 +298,42 @@ function Homepage() {
   };
 
   useEffect(() => {
-    if (sunrise === "--:--" || sunset === "--:--") return;
-
-    const timeToMinutes = (timeStr) => {
-      const [hours, minutes] = timeStr.split(":").map(Number);
-      return hours * 60 + minutes;
-    };
+    // Ci assicuriamo che i dati meteo siano caricati
+    if (!weatherData || !weatherData.sys) return;
 
     const updateSunPosition = () => {
-      const now = new Date();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
-      const sunriseMins = timeToMinutes(sunrise);
-      const sunsetMins = timeToMinutes(sunset);
+      // Otteniamo il momento attuale in secondi (Timestamp assoluto)
+      const nowSec = Math.floor(Date.now() / 1000);
+
+      // Prendiamo i secondi esatti dell'alba e tramonto forniti dall'API
+      const sunriseSec = weatherData.sys.sunrise;
+      const sunsetSec = weatherData.sys.sunset;
 
       let progress = 0;
 
-      //  a che punto siamo della giornata (da 0 a 1)
-      if (currentMinutes <= sunriseMins) {
-        progress = 0;
-      } else if (currentMinutes >= sunsetMins) {
-        progress = 1;
+      // Calcoliamo la percentuale esatta basandoci sul tempo assoluto
+      if (nowSec <= sunriseSec) {
+        progress = 0; // Prima dell'alba (fermo all'inizio)
+      } else if (nowSec >= sunsetSec) {
+        progress = 1; // Dopo il tramonto (fermo alla fine)
       } else {
-        progress = (currentMinutes - sunriseMins) / (sunsetMins - sunriseMins);
+        // Percentuale di completamento della giornata
+        progress = (nowSec - sunriseSec) / (sunsetSec - sunriseSec);
       }
 
-      // Raggio e centro dell'arco definiti
+      // Raggio e centro dell'arco
       const radius = 80;
       const cx = 100;
       const cy = 90;
 
+      // Calcoliamo l'angolo in radianti
       const angle = Math.PI * (1 - progress);
 
+      // Posizioni X e Y
       const x = cx + radius * Math.cos(angle);
       const y = cy - radius * Math.sin(angle);
 
+      // Ritardo per l'animazione d'ingresso
       setTimeout(() => {
         setSunPosition({ x, y });
       }, 500);
@@ -339,10 +341,12 @@ function Homepage() {
 
     updateSunPosition();
 
-    // Opzionale: aggiorna la posizione del sole ogni minuto!
+    // Aggiorna la posizione ogni minuto
     const interval = setInterval(updateSunPosition, 60000);
     return () => clearInterval(interval);
-  }, [sunrise, sunset]);
+
+    // L'effetto ora reagisce al cambiamento di weatherData
+  }, [weatherData]);
 
   return (
     <div style={containerStyle} id="weather-app p-0">
