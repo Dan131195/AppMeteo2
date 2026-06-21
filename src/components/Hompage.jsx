@@ -41,6 +41,7 @@ function Homepage() {
 
   const [sunrise, setSunrise] = useState("--:--");
   const [sunset, setSunset] = useState("--:--");
+  const [sunPosition, setSunPosition] = useState({ x: 20, y: 90 });
 
   const [tempMin, setTempMin] = useState("");
   const [tempMax, setTempMax] = useState("");
@@ -295,6 +296,53 @@ function Homepage() {
       setSunset(sunsetObj.toLocaleTimeString("it-IT", opzioni));
     }
   };
+
+  useEffect(() => {
+    if (sunrise === "--:--" || sunset === "--:--") return;
+
+    const timeToMinutes = (timeStr) => {
+      const [hours, minutes] = timeStr.split(":").map(Number);
+      return hours * 60 + minutes;
+    };
+
+    const updateSunPosition = () => {
+      const now = new Date();
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+      const sunriseMins = timeToMinutes(sunrise);
+      const sunsetMins = timeToMinutes(sunset);
+
+      let progress = 0;
+
+      //  a che punto siamo della giornata (da 0 a 1)
+      if (currentMinutes <= sunriseMins) {
+        progress = 0;
+      } else if (currentMinutes >= sunsetMins) {
+        progress = 1;
+      } else {
+        progress = (currentMinutes - sunriseMins) / (sunsetMins - sunriseMins);
+      }
+
+      // Raggio e centro dell'arco definiti
+      const radius = 80;
+      const cx = 100;
+      const cy = 90;
+
+      const angle = Math.PI * (1 - progress);
+
+      const x = cx + radius * Math.cos(angle);
+      const y = cy - radius * Math.sin(angle);
+
+      setTimeout(() => {
+        setSunPosition({ x, y });
+      }, 500);
+    };
+
+    updateSunPosition();
+
+    // Opzionale: aggiorna la posizione del sole ogni minuto!
+    const interval = setInterval(updateSunPosition, 60000);
+    return () => clearInterval(interval);
+  }, [sunrise, sunset]);
 
   return (
     <div style={containerStyle} id="weather-app p-0">
@@ -598,7 +646,16 @@ function Homepage() {
                         strokeDasharray="7 7"
                       />
 
-                      <circle cx="100" cy="10" r="8" fill="#FFB703" />
+                      <circle
+                        cx={sunPosition.x}
+                        cy={sunPosition.y}
+                        r="8"
+                        fill="#FFB703"
+                        style={{
+                          transition: "all 2s cubic-bezier(0.25, 1, 0.5, 1)",
+                          boxShadow: "0 0 10px #FFB703",
+                        }}
+                      />
                     </svg>
 
                     <div
