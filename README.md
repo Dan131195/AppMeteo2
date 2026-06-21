@@ -9,8 +9,9 @@ L'applicazione adotta un approccio **Mobile-First**, garantendo un'interfaccia n
 ## 📸 Anteprima Interfaccia (Mobile View)
 
 <p align="center">
-  <img src="/src/assets/img/Screenshot-WeatherApp.png" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
-  <img src="/src/assets/img/Screenshot-WeatherApp-2.png" alt="WeatherApp Solar Cycle Preview" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
+  <img src="/src/assets/img/Screenshot-WeatherApp.png" alt="WeatherApp Preview" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
+  <img src="/src/assets/img/Screenshot-WeatherApp-2.png" alt="WeatherApp Preview" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
+  <img src="/src/assets/img/Screenshot-WeatherApp-3.png" alt="WeatherApp Preview" width="320" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 10px;" />
 </p>
 
 
