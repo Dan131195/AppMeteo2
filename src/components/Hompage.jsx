@@ -366,23 +366,23 @@ function Homepage() {
               </button>
 
               <div
-                className="collapse navbar-collapse my-2"
+                className="collapse navbar-collapse my-2 text-center"
                 id="navbarSupportedContent"
               >
                 <form
-                  className="bg-opacity rounded-4 w-100 d-flex justify-content-center align-items-center  w-100 py-2"
+                  className="bg-opacity rounded-4 ps-3 py-4 d-inline"
                   role="search"
                   onSubmit={handleSubmit}
                 >
                   <input
-                    className="form-control bg-transparent text-light"
+                    className="form-control bg-transparent text-light d-inline"
                     type="search"
                     placeholder="Es. Londra"
                     aria-label="Search"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                   />
-                  <button className="btn" type="submit">
+                  <button className="btn d-inline" type="submit">
                     <i className="bi bi-arrow-right-circle fs-3"></i>
                   </button>
                 </form>
