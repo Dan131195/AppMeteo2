@@ -206,8 +206,8 @@ function Homepage() {
       if (data.weather && data.weather[0]) {
         const weatherIconCode = data.weather[0].icon;
 
-        // const newBg = backgroundMap[55];
-        // setBackgroundUrl(newBg);
+        const newBg = backgroundMap[weatherIconCode];
+        setBackgroundUrl(newBg);
       }
       console.log(data);
       setWeatherData(data);
