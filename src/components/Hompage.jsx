@@ -49,8 +49,6 @@ function Homepage() {
   const [tempMin, setTempMin] = useState("");
   const [tempMax, setTempMax] = useState("");
 
-  const arr = [];
-
   //API KEY
   const key = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
@@ -222,6 +220,7 @@ function Homepage() {
         `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
       const data = await response.json();
+      const arr = [];
       data.list.slice(0, 12).forEach((item) => {
         arr.push(item);
       });
