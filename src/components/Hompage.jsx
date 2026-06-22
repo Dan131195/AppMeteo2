@@ -209,7 +209,6 @@ function Homepage() {
         const newBg = backgroundMap[weatherIconCode];
         setBackgroundUrl(newBg);
       }
-      console.log(data);
       setWeatherData(data);
       sunriseSunset(data.sys.sunrise, data.sys.sunset, data.timezone);
     } catch (error) {
@@ -227,7 +226,6 @@ function Homepage() {
         arr.push(item);
       });
       setWeatherTrheeHours(arr);
-      console.log(arr);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
     }
@@ -252,7 +250,6 @@ function Homepage() {
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto`,
       );
       const weatherData = await response.json();
-      console.log(weatherData);
 
       setTempMin(Math.round(weatherData.daily.temperature_2m_min[0]));
       setTempMax(Math.round(weatherData.daily.temperature_2m_max[0]));
