@@ -7,8 +7,9 @@
   font-size: 12px;
 }
 
-#weatherApp > div:first-of-type {
-  flex: 1;
+#content {
+  min-height: 100vh;
+  margin: 0;
 }
 
 /* NAVBAR */
@@ -47,15 +48,8 @@ form {
 
 /* MAIN */
 
-#weather-app {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.content {
-  position: relative;
-  z-index: 1000;
+main {
+  flex-grow: 1;
 }
 
 .locationIcon {
@@ -86,7 +80,7 @@ form {
 }
 
 .weatherTrheeHours::-webkit-scrollbar-thumb {
-  background: #6a6a6a;
+  background: #989797;
   border-radius: 10px;
 }
 
@@ -141,6 +135,8 @@ footer {
   color: #cbcbcb;
   font-size: 0.9em;
 }
+
+/* PAGINA DI ERRORE*/
 
 /* ANIMAZIONE */
 
