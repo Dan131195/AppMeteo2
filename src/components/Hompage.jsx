@@ -40,6 +40,7 @@ function Homepage() {
 
   const [backgroundUrl, setBackgroundUrl] = useState("");
 
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
   const [sunrise, setSunrise] = useState("--:--");
@@ -182,8 +183,6 @@ function Homepage() {
 
   const fetchWeatherData = async (cityName) => {
     try {
-      setError(null);
-
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&lang=it&units=metric&appid=${key}`,
       );
@@ -399,6 +398,14 @@ function Homepage() {
             <img src={locationNotFound} alt="" width={300} />
           </div>
         )}
+
+        {/* Pagina di caricamento */}
+        <div id="loadingContainer">
+          <div className="loadingCards m-2 "></div>
+          <div className="loadingCards m-2 "></div>
+          <div className="loadingCards loadingCardsMax m-2 "></div>
+          <div className="loadingCards m-2 "></div>
+        </div>
 
         {weatherData && !error && (
           <main className="text-center flex-grow-1">
