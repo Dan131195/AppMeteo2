@@ -64,10 +64,6 @@ main {
   text-transform: uppercase;
 }
 
-.hompageIcon {
-  width: 2.5em;
-}
-
 .bg-opacity {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -113,6 +109,24 @@ main {
   letter-spacing: 1.05px;
 }
 
+/* ANIMAZIONE */
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: slideUpFade 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* FOOTER */
 
 footer {
@@ -136,22 +150,35 @@ footer {
   font-size: 0.9em;
 }
 
-/* PAGINA DI ERRORE*/
+/* PAGINA DI CARICAMENTO*/
 
-/* ANIMAZIONE */
-
-@keyframes slideUpFade {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+#loadingCards {
+  min-height: 97vh;
 }
 
-.animate-fade-up {
-  opacity: 0;
-  animation: slideUpFade 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.loadingCards {
+  height: 120px;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: loading 3s infinite linear;
+}
+
+.loadingCardsMax {
+  height: 280px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

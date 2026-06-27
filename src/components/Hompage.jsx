@@ -208,8 +208,12 @@ function Homepage() {
       }
       setWeatherData(data);
       sunriseSunset(data.sys.sunrise, data.sys.sunset, data.timezone);
+      setIsLoading(false);
+      setError(false);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
+      setError(true);
+      setIsLoading(false);
     }
   };
 
@@ -223,9 +227,12 @@ function Homepage() {
       data.list.slice(0, 12).forEach((item) => {
         arr.push(item);
       });
+      setIsLoading(false);
       setWeatherTrheeHours(arr);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
+      setError(true);
+      setIsLoading(false);
     }
   };
 
@@ -264,15 +271,18 @@ function Homepage() {
       });
 
       setWeatherWeekDays(forecastday);
+      setIsLoading(false);
     } catch (error) {
       console.error("Errore nel recupero dei dati meteo:", error);
+      setError(true);
+      setIsLoading(false);
     }
   };
 
   const containerStyle = {
     backgroundImage: backgroundUrl
       ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${backgroundUrl}`
-      : "linear-gradient(rgba(5, 10, 99, 0.4), rgba(19, 27, 183, 0.4))",
+      : "linear-gradient(135deg, #1b2f38, #295d6e, #2c5364)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     transition: "background-image 0.5s ease-in-out",
@@ -400,12 +410,14 @@ function Homepage() {
         )}
 
         {/* Pagina di caricamento */}
-        <div id="loadingContainer">
-          <div className="loadingCards m-2 "></div>
-          <div className="loadingCards m-2 "></div>
-          <div className="loadingCards loadingCardsMax m-2 "></div>
-          <div className="loadingCards m-2 "></div>
-        </div>
+        {isLoading && (
+          <div id="loadingContainer">
+            <div className="loadingCards mx-2 my-3"></div>
+            <div className="loadingCards mx-2 my-3"></div>
+            <div className="loadingCards loadingCardsMax mx-2 my-3"></div>
+            <div className="loadingCards mx-2 my-3"></div>
+          </div>
+        )}
 
         {weatherData && !error && (
           <main className="text-center flex-grow-1">
